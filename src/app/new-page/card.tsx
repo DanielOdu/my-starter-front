@@ -2,6 +2,7 @@
 
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 type Props = { prop1: string | number; prop2?: any };
 
@@ -19,7 +20,9 @@ export default function Card({ prop1, prop2 }: Props) {
   return (
     <div className=" bg-gray-800 mb-2">
       <h1 onClick={handleClick}>{prop1}</h1>
-      <h2>{prop2}</h2>
+      <h2>
+        <Link href={`new-page/${prop2}`}>See details</Link>
+      </h2>
       {count}
     </div>
   );

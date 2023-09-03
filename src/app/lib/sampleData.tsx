@@ -599,6 +599,7 @@ export const addProduct = (product: Product) => {
 export const deleteProduct = (id: number) => {
   products = products.filter((product) => product.id !== id);
 };
+
 export const updateProduct = (
   id: number,
   title: string,

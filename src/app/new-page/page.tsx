@@ -64,7 +64,9 @@ export default async function NewPage() {
       {/* or you could incorporate the imported component and pass the mapped data to it like this */}
       {items &&
         items.map((item, idx) => {
-          return <Card prop1={item.title} key={`post-${idx}`} />;
+          return (
+            <Card prop1={item.title} prop2={item.id} key={`post-${idx}`} />
+          );
         })}
       <p>
         <Link href="./third-party-api">third-party-api</Link>

@@ -1,9 +1,93 @@
+import getDomain from "@/app/lib/getDomain";
+import Image from "next/image";
+
 //Type here depends on what kind of value you expect to receive in the params parameter. If you are using Next.js dynamic routes, then the params parameter will be an object that contains the route parameters as key-value pairs. For example, if your page file is named [id].js and you visit /posts/1, then the params parameter will be { id: “1” }. In this case, you can use a type like { [key: string]: string } to indicate that the params parameter is an object with string keys and string values. Alternatively, you can use a more specific type that matches the exact shape of the params object, such as { id: string }. This will give you more type safety and code completion.
-export default function NewDynamicPage(params: { slug: string }) {
-  console.log(params);
+export default async function NewDynamicPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+  // console.log("The slug is:", slug);
+  const data = async () =>
+    //This is the same as the getData function in the main page.tsx file but this one is inline so that the slug can be accessed to pass to the endpoint variable. This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
+    {
+      //save the returned value from the imported function to the 'domain' variable
+      const domain = await getDomain();
+      //What is the endpoint that has access to the data?
+      const endpoint = `${domain}/api/gets/${slug}`;
+      // console.log("endpoint:", endpoint);
+
+      //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
+      //There are different fetch caching options:
+      // force-cache (default) - fetches data once at build time and never again.
+      // revalidate - fetches data in set intervals
+      // no-store - fetches each time the component is rendered
+
+      //un-comment the one you want to use. non default options should only be used in sever components. If you have a client component that triggers a fetch with a button etc this will be handled in a different way
+
+      // const res = await fetch(endpoint);//no store default option
+      // const res = await fetch(endpoint, { next: { revalidate: 10 } }); //revalidate after 10 seconds
+      const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
+      // .then((response) => response.json())
+      // .then((json) => console.log(json));
+
+      //Check that the response is OK, if not, throw an error
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      //Check that the content-type is application/json. If its not, return an empty array
+      if (res.headers.get("content-type") != "application/json") {
+        console.log("Not application/json still");
+        return { items: [] };
+      }
+
+      //This return statement assumes the response is returned as json. If you're getting errors, its worth checking this in your endpoint.
+      // console.log("Returning data");
+      return res.json();
+    };
+  const productData = await data();
+  //deconstruct the project item from the overall productData variable
+  const { product } = productData;
+  //must define images outside the returned render in order to access them using the map funtion. I.e you cannot do product.images.map()
+  const images = product.images;
+
+  console.log("Product data:::", productData);
+
   return (
     <main>
       <h1>This is a new dynamic page</h1>
+      <h2>Product id from params: {params.slug}</h2>
+      <h3 className=" bg-white text-gray-800">PRODUCT INFO</h3>
+      <h3>Product id: {product.id}</h3>
+      <h3>Product title: {product.title}</h3>
+      <h3>Product description: {product.description}</h3>
+      <h3>Product price: {product.price}</h3>
+      <h3>Product discountPercentage: {product.discountPercentage}</h3>
+      <h3>Product rating: {product.rating}</h3>
+      <h3>Product stock: {product.stock}</h3>
+      <h3>Product brand: {product.brand}</h3>
+      <h3>Product category: {product.category}</h3>
+      <h3>Product thumbnail:</h3>
+      <Image
+        src={product.thumbnail}
+        alt="Product image"
+        width={100}
+        height={100}
+        priority
+      />
+      <h3>Product images:</h3>
+
+      {images.map((image: string) => (
+        <Image
+          src={image}
+          alt="Product image"
+          width={100}
+          height={100}
+          priority
+        />
+      ))}
     </main>
   );
 }
