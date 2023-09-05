@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import getDomain from "../lib/getDomain";
-import Card from "./card";
+import ProductGrid from "../components/ProductGrid";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 async function getData() {
@@ -61,13 +61,10 @@ export default async function NewPage() {
                <p>{item.description}</p>
              </li> */}
 
-      {/* or you could incorporate the imported component and pass the mapped data to it like this */}
-      {items &&
-        items.map((item, idx) => {
-          return (
-            <Card prop1={item.title} prop2={item.id} key={`post-${idx}`} />
-          );
-        })}
+      {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+
+      <ProductGrid items={items} />
+
       <p>
         <Link href="./third-party-api">third-party-api</Link>
       </p>
