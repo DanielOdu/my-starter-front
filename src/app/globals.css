@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.inactiveCategory {
+  @apply text-sm;
+}
+
+.activeCategory {
+  @apply text-sm bg-red-400;
+}
