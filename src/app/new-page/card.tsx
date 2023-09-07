@@ -17,6 +17,7 @@ export default function Card({ prop1, prop2 }: Props) {
   if (!prop1) {
     return <div>Empty</div>;
   }
+
   return (
     <div className=" bg-gray-800 mb-2">
       <h1 onClick={handleClick}>{prop1}</h1>

@@ -590,7 +590,43 @@ let products: Product[] = [
 ];
 
 //handlers
-export const getProducts = () => products;
+
+//Get products using an Arrow function
+// export const getProducts = () => products;
+
+//This version of the arrow function incorporates a timeout to delay the return of 'products' by 2 secs. This is to test the loading state in the UI
+
+// export const getProducts = async () => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       // console.log("productsss", products[0]);
+//       resolve(products);
+//     }, 2000);
+//   });
+// };
+
+//Or you can extract the promise into a seperate function called wait and add it to whichever async function you want to delay
+
+export async function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export const getProducts = async () => {
+  await wait(2000);
+  return products;
+};
+
+//Get products using a function declaration. These are hoisted and can be invoked before being defined.
+// export async function getProducts() {
+//   await wait(2000);
+//   return products;
+// }
+
+//Get products using function expression
+// export const getProducts = async function () {
+//   await wait(2000);
+//   return products;
+// };
 
 export const addProduct = (product: Product) => {
   products.push(product);

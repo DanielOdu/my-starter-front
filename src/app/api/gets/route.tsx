@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const products = getProducts();
+    const products = await getProducts(); //await was added to this line as the getProducts function was made async in the sampleData.tsx to test the loading state using a timeout
     return NextResponse.json({ message: "OK", products }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });

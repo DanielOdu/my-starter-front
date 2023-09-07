@@ -50,7 +50,6 @@ export default function FilterBar({
               >
                 {category}
               </button>
-              {/* (category) */}
             </div>
           );
         })}
