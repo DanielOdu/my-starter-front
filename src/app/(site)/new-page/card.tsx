@@ -19,12 +19,14 @@ export default function Card({ prop1, prop2 }: Props) {
   }
 
   return (
-    <div className=" bg-gray-800 mb-2">
+    <div className=" bg-gray-800 mb-2 text-xs">
       <h1 onClick={handleClick}>{prop1}</h1>
       <h2>
         <Link href={`new-page/${prop2}`}>See details</Link>
       </h2>
-      {count}
+      <p>click count: {count}</p>
+      <p>Quick view</p>
+      <p>Delete item button</p>
     </div>
   );
 }

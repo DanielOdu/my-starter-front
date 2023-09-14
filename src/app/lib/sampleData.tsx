@@ -1,5 +1,5 @@
-type Product = {
-  id: number;
+type Item = {
+  id: number | string;
   title: string;
   description: string;
   price: number;
@@ -12,7 +12,7 @@ type Product = {
   images: string[];
 };
 
-let products: Product[] = [
+let products: Item[] = [
   {
     id: 1,
     title: "iPhone 9",
@@ -628,7 +628,8 @@ export const getProducts = async () => {
 //   return products;
 // };
 
-export const addProduct = (product: Product) => {
+export const addItem = (product: Item) => {
+  console.log("add item function triggered");
   products.push(product);
 };
 
@@ -667,6 +668,6 @@ export const updateProduct = (
   }
 };
 
-export const getbyID = (id: number) => {
+export const getbyID = (id: number | string) => {
   return products.find((product) => product.id === id);
 };

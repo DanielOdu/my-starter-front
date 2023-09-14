@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 
-export default function LinksCreateForm() {
+export default function AddItemForm() {
   //This is an optional part of the function where the results returned from the API after the post request can be stored as state and used in the UI or however else.
   const [results, setResults] = useState(null);
 
@@ -35,18 +35,72 @@ export default function LinksCreateForm() {
 
   return (
     <>
-      <form onSubmit={handleForm}>
+      <form onSubmit={handleForm} className=" flex flex-col">
+        {/* <input
+          className=" text-black"
+          type="text"
+          name="id"
+          placeholder="id"
+        ></input> */}
         <input
           className=" text-black"
           type="text"
-          name="name"
-          placeholder="name"
+          name="title"
+          placeholder="title"
         ></input>
         <input
           className=" text-black"
           type="text"
           name="description"
           placeholder="description"
+        ></input>
+        <input
+          className=" text-black"
+          type="number"
+          name="price"
+          placeholder="price"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="discountPercentage"
+          placeholder="discountPercentage"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="rating"
+          placeholder="rating"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="stock"
+          placeholder="stock"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="brand"
+          placeholder="brand"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="category"
+          placeholder="category"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="thumbnail"
+          placeholder="thumbnail"
+        ></input>
+        <input
+          className=" text-black"
+          type="text"
+          name="images"
+          placeholder="images"
         ></input>
         <button type="submit">Submit</button>
       </form>

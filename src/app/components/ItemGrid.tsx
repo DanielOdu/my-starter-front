@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, SetStateAction, Suspense } from "react";
-import Card from "../new-page/card";
+import Card from "../(site)/new-page/card";
 // import dynamic from "next/dynamic";
 // const Card = dynamic(() => import("../new-page/card"), { suspense: true });
 import SearchBar from "./SearchBar";
@@ -14,7 +14,7 @@ type Props = {
   items: any[];
 };
 
-export default function ProductGrid({ items }: Props) {
+export default function ItemGrid({ items }: Props) {
   const productItems = items;
   //Remember when declaring an array state variable with the useState hook, use a generic to type the array as done for filteredItems below.
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
@@ -92,6 +92,7 @@ export default function ProductGrid({ items }: Props) {
               prop2={item["id"]}
               key={`item-${idx}`}
             />
+
             // </Suspense>
           );
         })}

@@ -31,7 +31,7 @@ export default async function NewDynamicPage({
       const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
       // .then((response) => response.json())
       // .then((json) => console.log(json));
-
+      console.log("response from endpoint", res);
       //Check that the response is OK, if not, throw an error
       if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -47,47 +47,54 @@ export default async function NewDynamicPage({
       // console.log("Returning data");
       return res.json();
     };
-  const productData = await data();
-  //deconstruct the project item from the overall productData variable
-  const { product } = productData;
-  //must define images outside the returned render in order to access them using the map funtion. I.e you cannot do product.images.map()
-  const images = product.images;
 
-  console.log("Product data:::", productData);
+  const ItemData = await data();
+  //deconstruct the project item from the overall productData variable
+  const { item } = ItemData;
+  //must define images outside the returned render in order to access them using the map funtion. I.e you cannot do product.images.map()
+  const images = item.images;
+
+  console.log("Item data:::", ItemData);
 
   return (
-    <main>
-      <h1>This is a new dynamic page</h1>
-      <h2>Product id from params: {params.slug}</h2>
-      <h3 className=" bg-white text-gray-800">PRODUCT INFO</h3>
-      <h3>Product id: {product.id}</h3>
-      <h3>Product title: {product.title}</h3>
-      <h3>Product description: {product.description}</h3>
-      <h3>Product price: {product.price}</h3>
-      <h3>Product discountPercentage: {product.discountPercentage}</h3>
-      <h3>Product rating: {product.rating}</h3>
-      <h3>Product stock: {product.stock}</h3>
-      <h3>Product brand: {product.brand}</h3>
-      <h3>Product category: {product.category}</h3>
-      <h3>Product thumbnail:</h3>
-      <Image
-        src={product.thumbnail}
-        alt="Product image"
-        width={100}
-        height={100}
-        priority
-      />
-      <h3>Product images:</h3>
-
-      {images.map((image: string) => (
+    <main className=" flex">
+      <div>
+        <h1>This is a new dynamic page</h1>
+        <h2>Product id from params: {params.slug}</h2>
+        <h3 className=" bg-white text-gray-800">PRODUCT INFO</h3>
+        <h3>Product id: {item.id}</h3>
+        <h3>Product title: {item.title}</h3>
+        <h3>Product description: {item.description}</h3>
+        <h3>Product price: {item.price}</h3>
+        <h3>Product discountPercentage: {item.discountPercentage}</h3>
+        <h3>Product rating: {item.rating}</h3>
+        <h3>Product stock: {item.stock}</h3>
+        <h3>Product brand: {item.brand}</h3>
+        <h3>Product category: {item.category}</h3>
+        <h3>Product thumbnail:</h3>
         <Image
-          src={image}
+          src={item.thumbnail}
           alt="Product image"
           width={100}
           height={100}
           priority
         />
-      ))}
+        <h3>Product images:</h3>
+
+        {images.map((image: string) => (
+          <Image
+            src={image}
+            alt="Product image"
+            width={100}
+            height={100}
+            priority
+          />
+        ))}
+      </div>
+
+      <div className=" bg-gray-600">
+        Update form goes here<p>update button</p>
+      </div>
     </main>
   );
 }

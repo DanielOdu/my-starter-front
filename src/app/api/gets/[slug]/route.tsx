@@ -15,17 +15,17 @@ interface ContextType {
 export async function GET(request: NextRequest, context: ContextType) {
   try {
     const id = request.url.split("gets/")[1];
-    // console.log(id);
+    console.log("id is", id);
     //id must be converted to a number as it has the type of number in the sampleData file
-    const product = getbyID(parseInt(id));
+    const item = getbyID(parseInt(id));
 
-    if (!product) {
+    if (!item) {
       return NextResponse.json(
-        { message: "ERROR, Product not found" },
+        { message: "ERROR, item not found" },
         { status: 401 }
       );
     }
-    return NextResponse.json({ message: "OK", product }, { status: 200 });
+    return NextResponse.json({ message: "Ok", item }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import getDomain from "../lib/getDomain";
-import ProductGrid from "../components/ProductGrid";
+import ItemGrid from "@/app/components/ItemGrid";
+import AddItemForm from "@/app/components/AddItemForm";
+import getDomain from "@/app/lib/getDomain";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 async function getData() {
   //save the returned value from the imported function to the 'domain' variable
   const domain = getDomain();
+
   //What is the endpoint that has access to the data?
   const endpoint = `${domain}/api/gets`;
 
@@ -18,7 +20,7 @@ async function getData() {
 
   //un-comment the one you want to use. non default options should only be used in sever components. If you have a client component that triggers a fetch with a button etc this will be handled in a different way
 
-  // const res = await fetch(endpoint);//no store default option
+  // const res = await fetch(endpoint); //no store default option
   // const res = await fetch(endpoint, { next: { revalidate: 10 } }); //revalidate after 10 seconds
   const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
   // .then((response) => response.json())
@@ -62,8 +64,13 @@ export default async function NewPage() {
              </li> */}
 
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
-
-      <ProductGrid items={items} />
+      <div className=" flex ">
+        <ItemGrid items={items} />
+        <div className=" bg-gray-600">
+          {" "}
+          <AddItemForm />
+        </div>
+      </div>
 
       <p>
         <Link href="./third-party-api">third-party-api</Link>
