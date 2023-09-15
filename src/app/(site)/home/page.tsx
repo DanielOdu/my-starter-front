@@ -43,16 +43,18 @@ async function getData() {
 }
 
 //Your default function that renders the content will also be async and will 'await' the getData function above in order to have access to the data in the component.
-export default async function NewPage() {
+export default async function HomePage() {
   const data = await getData();
   const items = data && data.products ? [...data.products] : [];
   // console.log("data", data);
   // console.log("items", items);
-  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
+  // console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <main>
-      <h1>This is a new page</h1>
-      <p>"Gets" data from the endpoint api/gets</p>
+      <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
+      <h3 className=" font-black uppercase">
+        "Gets" dummy data from the endpoint api/gets
+      </h3>
       {/* This is a way to access the data in the component. It checks if data is true and if so, displays the json as a string */}
       {/* {data && JSON.stringify(data)} */}
 
@@ -64,20 +66,11 @@ export default async function NewPage() {
              </li> */}
 
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
-      <div className=" flex ">
+      <div className=" flex h-auto overflow-auto bg-orange-300 ">
         <ItemGrid items={items} />
-        <div className=" bg-gray-600">
-          {" "}
-          <AddItemForm />
-        </div>
+        {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
       </div>
 
-      <p>
-        <Link href="./third-party-api">third-party-api</Link>
-      </p>
-      <p>
-        <Link href="./multiple-third-party-api">multiple-third-party-api</Link>
-      </p>
       <Image
         src="/vercel.svg"
         alt="Vercel Logo"

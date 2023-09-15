@@ -30,7 +30,7 @@ export default function FilterBar({
 
   //INSERT CODE HERE
   return (
-    <div className=" text-gray-700 ">
+    <div className=" text-white flex space-x-3 pb-2">
       {/* {productItems &&
         productItems.map((productItem, idx) => {
           return <p>{productItem.category}</p>;

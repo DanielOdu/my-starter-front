@@ -3,13 +3,13 @@ import Nav from "@/app/components/Nav";
 
 const SiteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className=" bg-blue-500">
-      <main className=" ">
-        <Nav />
+    <>
+      <Nav />
+      <main className=" max-w-[1485px] w-full px-4 pt-12 bg-blue-500 ">
         {children}
-        <Footer />
       </main>
-    </main>
+      <Footer />
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ export default async function thirdPartyData() {
       <p>{data.id}</p>
       <p>{data.name}</p>
 
-      <Link href="./new-page">new-page</Link>
+      <Link href="./home">home</Link>
     </>
   );
 }

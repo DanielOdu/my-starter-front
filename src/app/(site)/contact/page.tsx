@@ -1,5 +1,10 @@
 function contact() {
-  return <div>contact</div>;
+  return (
+    <div>
+      {" "}
+      <h1 className=" font-black text-6xl ">CONTACT PAGE</h1>
+    </div>
+  );
 }
 
 export default contact;

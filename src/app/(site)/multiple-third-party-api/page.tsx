@@ -3,7 +3,7 @@
 //A client-side component is also imported from another page folder into here and data can be passed to it through the 'prop' prop as long as it conforms to the 'prop' type which is string or number.
 
 import Link from "next/link";
-import Card from "../new-page/card";
+import Card from "../home/card";
 
 type Time = {
   datetime: string;
@@ -75,7 +75,7 @@ export default async function thirdPartyData() {
         {/* This is a card imported from another page folder that takes a 'title' property as a prop as a string */}
       </h2>
       <Card prop1={data.full_name} prop2={data.id} />
-      <Link href="./new-page">new-page</Link>
+      <Link href="./home">home</Link>
     </>
   );
 }

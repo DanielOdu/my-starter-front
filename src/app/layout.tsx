@@ -17,12 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} h-screen bg-pink-900 flex justify-center items-center `}
+        className={`${inter.className} h-screen bg-black flex justify-center  `}
       >
-        <div className=" border-2 border-green-600 rounded-3xl max-w-[90%] max-h-[90%] w-full h-full overflow-auto ">
-          {" "}
-          {children}
-        </div>
+        {/* <div className=" border-2 border-green-600 rounded-3xl max-w-[90%] max-h-[90%] w-full h-full overflow-auto ">
+          {" "} */}
+        {children}
+        {/* </div> */}
       </body>
     </html>
   );

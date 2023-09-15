@@ -1,4 +1,4 @@
-//THIS PAGE IS A COPY OF new-page AND SERVES AS A WAY OF TESTING ERROR HANDLING. THE ERROR IS IN THE ENDPOINT VALUE
+//THIS PAGE IS A COPY OF home AND SERVES AS A WAY OF TESTING ERROR HANDLING. THE ERROR IS IN THE ENDPOINT VALUE
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 async function getData() {

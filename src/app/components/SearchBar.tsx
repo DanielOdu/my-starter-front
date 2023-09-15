@@ -5,12 +5,13 @@ export default function SearchBar({ searchProp, onSearchValueChange }: Props) {
   //   console.log("search prop", searchProp);
   //   console.log("onSearchValueChange", onSearchValueChange);
   return (
-    <div className=" text-gray-700 ">
+    <div className=" text-white py-2 ">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="   Search"
         value={searchProp}
         onChange={onSearchValueChange}
+        className="border-2 border-gray-200 rounded-3xl bg-transparent"
       />
     </div>
   );

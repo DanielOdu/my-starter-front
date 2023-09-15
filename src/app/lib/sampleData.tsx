@@ -23,7 +23,7 @@ let products: Item[] = [
     stock: 94,
     brand: "Apple",
     category: "smartphones",
-    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+    thumbnail: "https://placehold.co/400/060606/a6a6a6/png",
     images: [
       "https://i.dummyjson.com/data/products/1/1.jpg",
       "https://i.dummyjson.com/data/products/1/2.jpg",

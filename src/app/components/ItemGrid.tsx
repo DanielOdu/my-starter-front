@@ -2,9 +2,9 @@
 "use client";
 
 import { useState, useEffect, SetStateAction, Suspense } from "react";
-import Card from "../(site)/new-page/card";
+import Card from "../(site)/home/card";
 // import dynamic from "next/dynamic";
-// const Card = dynamic(() => import("../new-page/card"), { suspense: true });
+// const Card = dynamic(() => import("../home/card"), { suspense: true });
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
 
@@ -67,35 +67,44 @@ export default function ItemGrid({ items }: Props) {
   //   console.log("filtered:", filteredItems);
 
   return (
-    <div className=" bg-gray-900 ">
-      {/* The serchbar component is imported and the state variable and handler function are passed to it */}
-      <SearchBar
-        searchProp={search}
-        onSearchValueChange={handleSearchValueChange}
-      />
-      <FilterBar
-        items={items}
-        onCategoryBtnClick={handleCategoryBtnClick}
-        selectedCategories={selectedCategories}
-      />
+    <div className=" bg-gray-900 w-full ">
+      <div className=" flex items-center space-x-6">
+        {/* The serchbar component is imported and the state variable and handler function are passed to it */}
+        <SearchBar
+          searchProp={search}
+          onSearchValueChange={handleSearchValueChange}
+        />
+
+        <FilterBar
+          items={items}
+          onCategoryBtnClick={handleCategoryBtnClick}
+          selectedCategories={selectedCategories}
+        />
+      </div>
 
       {/* Use can nest imported client components like this and pass the mapped data to it */}
-      {filteredItems &&
-        filteredItems.map((item, idx) => {
-          return (
-            //if you get a TS error saying 'Property does not exist on type 'never' .ts(2339)'. You can use bracket notation (item['title]) instead of dot notation (item.title)
+      <div
+        className=" grid grid-cols-4 auto-cols-[300px] gap-2 py-2
+       bg-blue-300 w-full "
+      >
+        {filteredItems &&
+          filteredItems.map((item, idx) => {
+            return (
+              //if you get a TS error saying 'Property does not exist on type 'never' .ts(2339)'. You can use bracket notation (item['title]) instead of dot notation (item.title)
 
-            //Trying to add suspense here. Imported card dynamically at the top, define 'Loading' variable and wrapped card in suspense wrapper. NEED TO FIX
-            // <Suspense fallback={<Loading />}>
-            <Card
-              prop1={item["title"]}
-              prop2={item["id"]}
-              key={`item-${idx}`}
-            />
+              //Trying to add suspense here. Imported card dynamically at the top, define 'Loading' variable and wrapped card in suspense wrapper. NEED TO FIX
+              // <Suspense fallback={<Loading />}>
+              <Card
+                prop1={item["title"]}
+                prop2={item["id"]}
+                prop3={item["thumbnail"]}
+                key={`item-${idx}`}
+              />
 
-            // </Suspense>
-          );
-        })}
+              // </Suspense>
+            );
+          })}
+      </div>
     </div>
   );
 }
