@@ -42,11 +42,11 @@ export default function FilterBar({
             <div key={`categories-${idx}`}>
               <button
                 onClick={() => onCategoryBtnClick(category)}
-                className={
+                className={`${
                   selectedCategories?.includes(category)
                     ? "activeCategory"
                     : "inactiveCategory"
-                }
+                } `}
               >
                 {category}
               </button>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaXTwitter, FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaXTwitter, FaInstagram, FaGithub, FaGlobe } from "react-icons/fa6";
 import { BsCircleHalf } from "react-icons/bs";
 
 export default function Landing() {
@@ -155,8 +155,11 @@ export default function Landing() {
               Contact Form • • • •
             </p>
           </div>
-          <div className=" w-48 flex max-h-full justify-between items-center border-l-2 px-12 text-gray-200 ">
+          <div className=" w-60 flex max-h-full justify-between items-center border-l-2 px-12 text-gray-200 ">
             {" "}
+            <Link href={"#"} className="hover:text-blue-400 transition-colors">
+              <FaGlobe />
+            </Link>
             <Link
               href={"https://X.com/dxnielodu"}
               className="hover:text-blue-400 transition-colors"

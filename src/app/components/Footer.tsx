@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaXTwitter, FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaXTwitter, FaInstagram, FaGithub, FaGlobe } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -23,6 +23,9 @@ export default function Footer() {
         </div>
         <span className=" justify-self-center text-white">copyright c</span>
         <div className="flex w-20 justify-between items-center justify-self-end text-white">
+          <Link href={"#"} className="hover:text-blue-400 transition-colors">
+            <FaGlobe />
+          </Link>
           <Link href="#" className="hover:text-blue-400 transition-colors">
             <FaXTwitter />
           </Link>

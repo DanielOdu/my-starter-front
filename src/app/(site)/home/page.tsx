@@ -3,6 +3,7 @@ import Image from "next/image";
 import ItemGrid from "@/app/components/ItemGrid";
 import AddItemForm from "@/app/components/AddItemForm";
 import getDomain from "@/app/lib/getDomain";
+import HeroCarousel from "@/app/components/HeroCarousel";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 async function getData() {
@@ -55,6 +56,7 @@ export default async function HomePage() {
       <h3 className=" font-black uppercase">
         "Gets" dummy data from the endpoint api/gets
       </h3>
+      <HeroCarousel />
       {/* This is a way to access the data in the component. It checks if data is true and if so, displays the json as a string */}
       {/* {data && JSON.stringify(data)} */}
 
@@ -66,7 +68,7 @@ export default async function HomePage() {
              </li> */}
 
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
-      <div className=" flex h-auto overflow-auto bg-orange-300 ">
+      <div className=" flex h-auto overflow-auto  ">
         <ItemGrid items={items} />
         {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
       </div>

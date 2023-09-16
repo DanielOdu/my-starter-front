@@ -3,12 +3,8 @@
 
 import { useState, useEffect, SetStateAction, Suspense } from "react";
 import Card from "../(site)/home/card";
-// import dynamic from "next/dynamic";
-// const Card = dynamic(() => import("../home/card"), { suspense: true });
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
-
-// const Loading = () => <div className=" bg-lime-400">Loading...</div>;
 
 type Props = {
   items: any[];
@@ -67,8 +63,8 @@ export default function ItemGrid({ items }: Props) {
   //   console.log("filtered:", filteredItems);
 
   return (
-    <div className=" bg-gray-900 w-full ">
-      <div className=" flex items-center space-x-6">
+    <div className="  w-full ">
+      <div className=" flex items-center justify-between">
         {/* The serchbar component is imported and the state variable and handler function are passed to it */}
         <SearchBar
           searchProp={search}
@@ -80,11 +76,12 @@ export default function ItemGrid({ items }: Props) {
           onCategoryBtnClick={handleCategoryBtnClick}
           selectedCategories={selectedCategories}
         />
+        <div className=" text-white">sort stuff</div>
       </div>
 
       {/* Use can nest imported client components like this and pass the mapped data to it */}
       <div
-        className=" grid grid-cols-4 auto-cols-[300px] gap-2 py-2
+        className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-2 py-2
        bg-blue-300 w-full "
       >
         {filteredItems &&

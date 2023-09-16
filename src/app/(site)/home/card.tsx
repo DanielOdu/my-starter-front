@@ -4,6 +4,7 @@
 // import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { FaBolt } from "react-icons/fa6";
 
 type Props = { prop1: string | number; prop2?: any; prop3: string };
 
@@ -20,20 +21,28 @@ export default function Card({ prop1, prop2, prop3 }: Props) {
   }
 
   return (
-    <div className="  h-fit   justify-self-center max-w-[300px] w-full bg-orange-500 border-2 border-red-400 rounded-2xl overflow-hidden text-white text-xs">
-      <div className=" w-full h-full relative bg-red-500">
+    <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[200px]">
+      <div className=" group/bolt w-full h-full relative bg-purple-500 ">
+        <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-blue-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20  pointer-events-none py-1 px-2 rounded-2xl">
+          <div className=" pointer-events-auto cursor-pointer peer">
+            <FaBolt />
+          </div>
+          <span className=" opacity-0 peer-hover:opacity-100 transition-opacity select-none pointer-events-none">
+            QUICK VIEW
+          </span>
+        </div>
         <Image
           src={prop3}
           alt="item.thumbnail"
           // className="dark:invert"
-          width={300}
-          height={300}
+          width={400}
+          height={400}
           // fill
           priority
         />
       </div>
-      <div className=" grow relative bg-pink-500 p-2">
-        <h1>{prop1}</h1>
+      <div className=" grow relative  p-2">
+        <h1 className=" font-black">{prop1}</h1>
         {/* onClick={handleClick} */}
         <button className=" border-2 border-white rounded-xl px-2 my-2">
           <h2>
@@ -41,7 +50,6 @@ export default function Card({ prop1, prop2, prop3 }: Props) {
           </h2>
         </button>
         {/* <p>click count: {count}</p> */}
-        <p>Quick view</p>
         {/* <p>Delete item button</p> */}
       </div>
     </div>

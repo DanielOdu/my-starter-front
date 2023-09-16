@@ -31,9 +31,16 @@ body {
 } */
 
 .inactiveCategory {
-  @apply text-sm;
+  @apply text-sm px-2 uppercase;
 }
 
 .activeCategory {
-  @apply text-sm bg-red-400;
+  @apply text-sm border-2 border-blue-400 text-blue-400 px-2 rounded-full uppercase transition;
+}
+
+.activeSlideBtn {
+  @apply border-2 rounded-full border-blue-400;
+}
+.inactiveSlideBtn {
+  @apply border-none;
 }

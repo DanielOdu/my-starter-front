@@ -30,10 +30,16 @@ export default function Nav() {
           >
             Contact
           </Link>
+          <Link
+            className="hover:text-blue-400 transition-colors"
+            href="./about"
+          >
+            About
+          </Link>
         </div>
         <div className=" flex items-center">
           <div className="text-white px-2">LANG</div>
-          <div className=" text-white hover:rotate-180 transition hover:text-blue-400">
+          <div className=" text-white hover:rotate-180 transition hover:text-blue-400 cursor-pointer">
             <BsCircleHalf />
           </div>
         </div>
