@@ -122,7 +122,8 @@ let products: Item[] = [
     rating: 4.57,
     stock: 83,
     brand: "Apple",
-    category: "laptops",
+    // category: "laptops",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -143,7 +144,8 @@ let products: Item[] = [
     rating: 4.25,
     stock: 50,
     brand: "Samsung",
-    category: "laptops",
+    // category: "laptops",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -164,7 +166,8 @@ let products: Item[] = [
     rating: 4.43,
     stock: 68,
     brand: "Microsoft Surface",
-    category: "laptops",
+    // category: "laptops",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -186,7 +189,8 @@ let products: Item[] = [
     rating: 4.54,
     stock: 96,
     brand: "Infinix",
-    category: "laptops",
+    // category: "laptops",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -229,7 +233,8 @@ let products: Item[] = [
     rating: 4.26,
     stock: 65,
     brand: "Impression of Acqua Di Gio",
-    category: "fragrances",
+    // category: "fragrances",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -249,7 +254,8 @@ let products: Item[] = [
     rating: 4,
     stock: 52,
     brand: "Royal_Mirage",
-    category: "fragrances",
+    // category: "fragrances",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -271,7 +277,8 @@ let products: Item[] = [
     rating: 4.59,
     stock: 61,
     brand: "Fog Scent Xpressio",
-    category: "fragrances",
+    // category: "fragrances",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -293,7 +300,8 @@ let products: Item[] = [
     rating: 4.21,
     stock: 114,
     brand: "Al Munakh",
-    category: "fragrances",
+    // category: "fragrances",
+    category: "smartphones",
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
@@ -671,10 +679,255 @@ export async function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const getProducts = async () => {
-  await wait(2000);
-  return products;
+// TRY TO INCORPORATE FUZZY MATCHING IN THE FOLLOWING FUNCTION fuse.js?
+// export const getProducts = async (searchQuery: string) => {
+//   await wait(2000);
+//   // console.log("(app/lib/sampleData.tsx) getProducts() triggered");
+//   // console.log(
+//   //   "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
+//   //   searchQuery
+//   // );
+//   if (searchQuery == "undefined") {
+//     return products;
+//   } else {
+//     const result = products.filter((product) =>
+//       Object.values(product).some((val) =>
+//         String(val).toLowerCase().includes(searchQuery.toLowerCase())
+//       )
+//     );
+//     return result;
+//   }
+// };
+
+//works
+// export const getProducts = async ({
+//   searchQuery,
+//   page,
+//   limit,
+// }: {
+//   searchQuery?: string;
+//   page: number;
+//   limit: number;
+// }) => {
+//   await wait(2000);
+//   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
+//   console.log(
+//     "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
+//     searchQuery
+//   );
+//   console.log(
+//     "(app/lib/sampleData.tsx) page passed into getProducts() is:",
+//     page
+//   );
+//   console.log(
+//     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
+//     limit
+//   );
+//   if (searchQuery === "undefined") {
+//     console.log("sampleData, searchQuery === undefined");
+//     return products;
+//   } else {
+//     console.log("sampleData, searchQuery is defined");
+//     const result = products.filter((product) =>
+//       Object.values(product).some((val) =>
+//         String(val).toLowerCase().includes(searchQuery.toLowerCase())
+//       )
+//     );
+//     return result;
+//   }
+// };
+
+//works - need to work on order of conditions
+// export const getProducts = async ({
+//   searchQuery,
+//   page = 1,
+//   limit = 10, //change to 12 as in home/page/tsx?
+// }: {
+//   searchQuery?: string | undefined;
+//   page: number;
+//   limit: number;
+// }) => {
+//   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
+//   console.log(
+//     "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
+//     searchQuery
+//   );
+//   console.log(
+//     "(app/lib/sampleData.tsx) page passed into getProducts() is:",
+//     page
+//   );
+//   console.log(
+//     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
+//     limit
+//   );
+//   try {
+//     const skip = (page - 1) * limit;
+//     let result = products.slice(skip, skip + limit);
+//     // console.log("result", result);
+
+//     // if (searchQuery) {
+//     //   result = result.filter((product) =>
+//     //     Object.values(product).some((val) =>
+//     //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
+//     //     )
+//     //   );
+//     // }
+
+//     if (searchQuery === "undefined") {
+//       console.log("sampleData, searchQuery === undefined");
+//       return result;
+//     } else {
+//       console.log("sampleData, searchQuery is defined");
+//       const searchedProducts = products.filter((product) =>
+//         Object.values(product).some((val) =>
+//           String(val).toLowerCase().includes(searchQuery.toLowerCase())
+//         )
+//       );
+//       //   return result;
+//       console.log(
+//         "searchedProducts - array length:",
+//         searchedProducts.length,
+//         searchedProducts
+//       );
+//       // return {
+//       //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
+//       // };
+//       return searchedProducts;
+//     }
+//   } catch (error) {
+//     return { error };
+//   }
+// };
+export const getProducts = async ({
+  searchQuery,
+  page = 1,
+  limit = 12,
+}: {
+  searchQuery?: string | undefined;
+  page: number;
+  limit: number;
+}) => {
+  console.log("(app/lib/sampleData.tsx) getProducts() triggered");
+  console.log(
+    "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
+    searchQuery
+  );
+  console.log(
+    "(app/lib/sampleData.tsx) page passed into getProducts() is:",
+    page
+  );
+  console.log(
+    "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
+    limit
+  );
+  try {
+    // console.log("result", result);
+
+    // if (searchQuery) {
+    //   result = result.filter((product) =>
+    //     Object.values(product).some((val) =>
+    //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
+    //     )
+    //   );
+    // }
+
+    if (searchQuery === "undefined") {
+      console.log("sampleData, searchQuery === undefined");
+      const skip = (page - 1) * limit;
+      let result = products.slice(skip, skip + limit);
+      return result;
+    } else {
+      console.log("sampleData, searchQuery is defined");
+      const searchedProducts = products.filter((product) =>
+        Object.values(product).some((val) =>
+          String(val).toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+      const skip = (page - 1) * limit;
+      let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
+      //   return result;
+      console.log(
+        "(sampleData.tsx) searchedProducts - array length:",
+        searchedProducts.length,
+        "sliced to:",
+        slicedSearchedProducts.length
+      );
+      // return {
+      //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
+      // };
+      return slicedSearchedProducts;
+    }
+  } catch (error) {
+    return { error };
+  }
 };
+
+// Sample data - replace this with your actual data
+// const moviesData = [
+//   { id: 1, title: "Movie 1", director: "Director 1" },
+//   { id: 2, title: "Movie 2", director: "Director 2" },
+//   // Add more movie objects as needed
+// ];
+
+// Function to get movies with optional query, page, and limit parameters
+// export const getMovies = async ({
+//   searchQuery,
+//   page = 1,
+//   limit = 10,
+// }: {
+//   searchQuery?: string;
+//   page: number;
+//   limit: number;
+// }) => {
+//   try {
+//     // Simulate a delay similar to your sleep function
+//     // await sleep(1000);
+
+//     // Apply filtering and pagination here based on the query, page, and limit
+
+//     // In this example, we'll just return the data as is without any filtering or pagination
+//     const skip = (page - 1) * limit;
+//     const slicedData = products.slice(skip, skip + limit);
+
+//     return { result: slicedData };
+//   } catch (error) {
+//     return { error };
+//   }
+// };
+
+// export const getProducts = async ({
+//   searchQuery,
+//   page = 1,
+//   limit = 10,
+// }: {
+//   searchQuery?: string;
+//   page: number;
+//   limit: number;
+// }) => {
+//   try {
+//     // Simulate a delay similar to your sleep function
+//     // await sleep(1000);
+
+//     // Apply filtering based on the search query
+//     if (!searchQuery || searchQuery === "undefined") {
+//       // Return all products if no search query provided
+//       const skip = (page - 1) * limit;
+//       const slicedData = products.slice(skip, skip + limit);
+//       return { products: slicedData };
+//     } else {
+//       const result = products.filter((product) =>
+//         Object.values(product).some((val) =>
+//           String(val).toLowerCase().includes(searchQuery.toLowerCase())
+//         )
+//       );
+//       return { products: result };
+//     }
+//   } catch (error) {
+//     return { error };
+//   }
+// };
+
+//-------------------------------------------------------------------------------
 
 //Get products using a function declaration. These are hoisted and can be invoked before being defined.
 // export async function getProducts() {
@@ -687,6 +940,16 @@ export const getProducts = async () => {
 //   await wait(2000);
 //   return products;
 // };
+
+//in order to create a 'set' which will give you a unique set of values from an array you can use the Set method. in this example, mulitple items have the same category but only the unique categories are returned.
+//The unique categories set then needs to be converted into an array before it can be mapped over. This can be done using the spread operator or by using 'Array.from()'
+// Spread operator could also have been used ( const uniqueCategoriesArray = [...uniqueCategories]; )
+export function getUniqueCategories() {
+  const uniqueCategories = new Set(products.map((product) => product.category));
+  const uniqueCartegoriesArray = Array.from(uniqueCategories);
+  // console.log("(sampleData.tsx) uniquecats", uniqueCartegoriesArray);
+  return uniqueCartegoriesArray;
+}
 
 export const addItem = (product: Item) => {
   console.log("add item function triggered");

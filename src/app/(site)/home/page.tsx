@@ -4,14 +4,27 @@ import ItemGrid from "@/app/components/ItemGrid";
 import AddItemForm from "@/app/components/AddItemForm";
 import getDomain from "@/app/lib/getDomain";
 import HeroCarousel from "@/app/components/HeroCarousel";
+import ServerSearch from "@/app/components/ServerSearch";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
-async function getData() {
+async function getData({
+  page,
+  limit,
+  query,
+}: {
+  page: number;
+  limit: number;
+  query?: string | undefined;
+}) {
   //save the returned value from the imported function to the 'domain' variable
   const domain = getDomain();
-
+  const searchQuery = query;
+  // console.log("(home/page.tsx) searchQuery in getData function is:", searchQuery);
   //What is the endpoint that has access to the data?
-  const endpoint = `${domain}/api/gets`;
+  const endpoint = `${domain}/api/gets?searchQuery=${encodeURIComponent(
+    searchQuery
+  )}&page=${page}&limit=${limit}`;
+  console.log("(home/page.tsx) endpoint =", endpoint);
 
   //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
   //There are different fetch caching options:
@@ -44,11 +57,33 @@ async function getData() {
 }
 
 //Your default function that renders the content will also be async and will 'await' the getData function above in order to have access to the data in the component.
-export default async function HomePage() {
-  const data = await getData();
-  const items = data && data.products ? [...data.products] : [];
-  // console.log("data", data);
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+  const limit =
+    typeof searchParams.limit === "string" ? Number(searchParams.limit) : 12;
+  const search =
+    typeof searchParams.search === "string" ? searchParams.search : undefined;
+  console.log(
+    "(home/page.tsx) searchparams in default HomePage function is:",
+    searchParams
+  );
+
+  const data = await getData({ page, limit, query: search });
+  console.log(
+    "(home/page.tsx) data returned from getData() in default HomePage function - lenth = ",
+    data.products.length,
+    data
+  );
+  // const items = data && data.products ? [...data.products] : [];
+  const items = Array.isArray(data.products) ? [...data.products] : [];
   // console.log("items", items);
+  const categories = data && data.categories ? [...data.categories] : [];
+  // console.log("(home/page.tsx) categories are:", categories);
   // console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
   return (
     <main>
@@ -68,8 +103,36 @@ export default async function HomePage() {
              </li> */}
 
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+      <ServerSearch search={search} />
+      <div className="flex space-x-6">
+        <Link
+          href={{
+            pathname: "/home",
+            query: {
+              ...(search ? { search } : {}),
+              page: page > 1 ? page - 1 : 1,
+            },
+          }}
+          className="rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800',
+                page <= 1 && 'pointer-events-none opacity-50"
+        >
+          Previous
+        </Link>
+        <Link
+          href={{
+            pathname: "/home",
+            query: {
+              ...(search ? { search } : {}),
+              page: page + 1,
+            },
+          }}
+          className="rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800"
+        >
+          Next
+        </Link>
+      </div>
       <div className=" flex h-auto overflow-auto  ">
-        <ItemGrid items={items} />
+        <ItemGrid items={items} categories={categories} />
         {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
       </div>
 

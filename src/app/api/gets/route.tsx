@@ -1,12 +1,38 @@
 //Standard API GET route
 
-import { getProducts } from "@/app/lib/sampleData";
+import { getProducts, getUniqueCategories } from "@/app/lib/sampleData";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request) {
   try {
-    const products = await getProducts(); //await was added to this line as the getProducts function was made async in the sampleData.tsx to test the loading state using a timeout
-    return NextResponse.json({ message: "OK", products }, { status: 200 });
+    const searchQuery = request.nextUrl.searchParams.get("searchQuery");
+    console.log(
+      "(app/api/gets) searchQuery passed from client into endpint is:",
+      searchQuery
+    );
+    const page = parseInt(request.nextUrl.searchParams.get("page"));
+    console.log(
+      "(app/api/gets) page passed from client into endpint is:",
+      page
+    );
+    const limit = parseInt(request.nextUrl.searchParams.get("limit"));
+    console.log(
+      "(app/api/gets) limit passed from client into endpint is:",
+      limit
+    );
+
+    const products = await getProducts({ searchQuery, page, limit }); //await was added to this line as the getProducts function was made async in the sampleData.tsx to test the loading state using a timeout
+    // console.log("(app/api/gets) products variable data returned from getProducts() in sampleData lib is:", products);
+    const categories = getUniqueCategories();
+    // console.log(
+    //   "(app/api/gets) categories data returned from uniqueCategories() in sampleData lib is:",
+    //   categories
+    // );
+    // console.log(products, categories);
+    return NextResponse.json(
+      { message: "OK", products, categories },
+      { status: 200 }
+    );
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }

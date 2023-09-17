@@ -8,10 +8,14 @@ import FilterBar from "./FilterBar";
 
 type Props = {
   items: any[];
+  categories: string[];
 };
 
-export default function ItemGrid({ items }: Props) {
+export default function ItemGrid({ items, categories }: Props) {
   const productItems = items;
+  // console.log("(ItemGrid.tsx) productItems passed into ItemGrid", productItems);
+  // console.log("(ItemGrid.tsx) categories passed into ItemGrid", categories);
+
   //Remember when declaring an array state variable with the useState hook, use a generic to type the array as done for filteredItems below.
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
   const [search, setSearch] = useState("");
@@ -19,12 +23,12 @@ export default function ItemGrid({ items }: Props) {
 
   //Handlers
 
-  const handleSearchValueChange = (e: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setSearch(e.target.value);
-    console.log("search value is:", search);
-  };
+  // const handleSearchValueChange = (e: {
+  //   target: { value: SetStateAction<string> };
+  // }) => {
+  //   setSearch(e.target.value);
+  //   console.log("search value is:", search);
+  // };
 
   const handleCategoryBtnClick = (selectedCategory: string) => {
     if (selectedCategories.includes(selectedCategory)) {
@@ -35,30 +39,30 @@ export default function ItemGrid({ items }: Props) {
     } else {
       setSelectedCatagories([...selectedCategories, selectedCategory]);
     }
-    console.log({ selectedCategory });
-    console.log({ selectedCategories });
+    console.log("(ItemGrid.tsx)", { selectedCategory });
+    console.log("(ItemGrid.tsx)", { selectedCategories });
   };
 
-  useEffect(() => {
-    const filtered = productItems.filter((item) => {
-      const searchCriteria = item.title
-        .toLowerCase()
-        .includes(search.toLowerCase());
+  // useEffect(() => {
+  //   const filtered = productItems.filter((item) => {
+  //     const searchCriteria = item.title
+  //       .toLowerCase()
+  //       .includes(search.toLowerCase());
 
-      let categoryCriteria = true; // Initialize as true if selectedCategories is empty
-      if (selectedCategories.length > 0) {
-        // Only check if selectedCategories is not empty
-        if (selectedCategories.some((xitem) => item.category.includes(xitem))) {
-          categoryCriteria = true;
-        } else {
-          categoryCriteria = false;
-        }
-      }
-      return searchCriteria && categoryCriteria;
-    });
+  //     let categoryCriteria = true; // Initialize as true if selectedCategories is empty
+  //     if (selectedCategories.length > 0) {
+  //       // Only check if selectedCategories is not empty
+  //       if (selectedCategories.some((xitem) => item.category.includes(xitem))) {
+  //         categoryCriteria = true;
+  //       } else {
+  //         categoryCriteria = false;
+  //       }
+  //     }
+  //     return searchCriteria && categoryCriteria;
+  //   });
 
-    setFilteredItems(filtered);
-  }, [search, selectedCategories]);
+  //   setFilteredItems(filtered);
+  // }, [search, selectedCategories]);
 
   //   console.log("filtered:", filteredItems);
 
@@ -66,15 +70,16 @@ export default function ItemGrid({ items }: Props) {
     <div className="  w-full ">
       <div className=" flex items-center justify-between">
         {/* The serchbar component is imported and the state variable and handler function are passed to it */}
-        <SearchBar
+        {/* <SearchBar
           searchProp={search}
           onSearchValueChange={handleSearchValueChange}
-        />
+        /> */}
 
         <FilterBar
           items={items}
           onCategoryBtnClick={handleCategoryBtnClick}
           selectedCategories={selectedCategories}
+          categories={categories}
         />
         <div className=" text-white">sort stuff</div>
       </div>
@@ -84,8 +89,8 @@ export default function ItemGrid({ items }: Props) {
         className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-2 py-2
        bg-blue-300 w-full "
       >
-        {filteredItems &&
-          filteredItems.map((item, idx) => {
+        {productItems &&
+          productItems.map((item, idx) => {
             return (
               //if you get a TS error saying 'Property does not exist on type 'never' .ts(2339)'. You can use bracket notation (item['title]) instead of dot notation (item.title)
 
