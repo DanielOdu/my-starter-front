@@ -5,15 +5,16 @@ import AddItemForm from "@/app/components/AddItemForm";
 import getDomain from "@/app/lib/getDomain";
 import HeroCarousel from "@/app/components/HeroCarousel";
 import ServerSearch from "@/app/components/ServerSearch";
+import InfiniteScrollItemGrid from "@/app/components/InfiniteScrollItemGrid";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
-async function getData({
-  page,
-  limit,
+export async function getData({
+  page = 1,
+  limit = 12,
   query,
 }: {
   page: number;
-  limit: number;
+  limit?: number;
   query?: string | undefined;
 }) {
   //save the returned value from the imported function to the 'domain' variable
@@ -24,7 +25,7 @@ async function getData({
   const endpoint = `${domain}/api/gets?searchQuery=${encodeURIComponent(
     searchQuery
   )}&page=${page}&limit=${limit}`;
-  console.log("(home/page.tsx) endpoint =", endpoint);
+  console.log("(home/page.tsx) getData() triggered. endpoint =", endpoint);
 
   //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
   //There are different fetch caching options:
@@ -68,17 +69,17 @@ export default async function HomePage({
     typeof searchParams.limit === "string" ? Number(searchParams.limit) : 12;
   const search =
     typeof searchParams.search === "string" ? searchParams.search : undefined;
-  console.log(
-    "(home/page.tsx) searchparams in default HomePage function is:",
-    searchParams
-  );
+  // console.log(
+  //   "(home/page.tsx) searchparams in default HomePage function is:",
+  //   searchParams
+  // );
 
   const data = await getData({ page, limit, query: search });
-  console.log(
-    "(home/page.tsx) data returned from getData() in default HomePage function - lenth = ",
-    data.products.length,
-    data
-  );
+  // console.log(
+  //   "(home/page.tsx) data returned from getData() in default HomePage function - lenth = ",
+  //   data.products.length,
+  //   data
+  // );
   // const items = data && data.products ? [...data.products] : [];
   const items = Array.isArray(data.products) ? [...data.products] : [];
   // console.log("items", items);
@@ -104,37 +105,23 @@ export default async function HomePage({
 
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
       <ServerSearch search={search} />
-      <div className="flex space-x-6">
-        <Link
-          href={{
-            pathname: "/home",
-            query: {
-              ...(search ? { search } : {}),
-              page: page > 1 ? page - 1 : 1,
-            },
-          }}
-          className="rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800',
-                page <= 1 && 'pointer-events-none opacity-50"
-        >
-          Previous
-        </Link>
-        <Link
-          href={{
-            pathname: "/home",
-            query: {
-              ...(search ? { search } : {}),
-              page: page + 1,
-            },
-          }}
-          className="rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800"
-        >
-          Next
-        </Link>
-      </div>
+
+      {/* pagination grid ------------ */}
+      {/* <div className=" flex h-auto overflow-auto  ">
+        <ItemGrid
+          items={items}
+          categories={categories}
+          search={search}
+          page={page}
+        />
+      </div> */}
+
+      {/* Infinite scroll grid ---------- */}
       <div className=" flex h-auto overflow-auto  ">
-        <ItemGrid items={items} categories={categories} />
-        {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
+        <InfiniteScrollItemGrid search={search} initialItems={items} />
       </div>
+
+      {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
 
       <Image
         src="/vercel.svg"
