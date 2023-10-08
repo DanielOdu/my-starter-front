@@ -1,10 +1,8 @@
 //This product grid component is passed the items from the parent who fetched them from the endpoint. They are then saved to an items variable used in this component. A useEffect hook is used to set the filteredItems state variable based on various criteria set within the filter function assigned to 'filtered' variable. dependencies can then be set which re-run the useeffect hook each time they are changed.
 "use client";
 
-import { useState, useEffect, SetStateAction, Suspense } from "react";
+import { useState } from "react";
 import Card from "../(site)/home/card";
-import SearchBar from "./SearchBar";
-import FilterBar from "./FilterBar";
 import Link from "next/link";
 
 type Props = {
@@ -12,9 +10,16 @@ type Props = {
   categories: string[];
   search: string | undefined;
   page: number;
+  filter?: string;
 };
 
-export default function ItemGrid({ items, categories, search, page }: Props) {
+export default function ItemGrid({
+  items,
+  categories,
+  search,
+  page,
+  filter,
+}: Props) {
   const productItems = items;
   // console.log("(ItemGrid.tsx) productItems passed into ItemGrid", productItems);
   // console.log("(ItemGrid.tsx) categories passed into ItemGrid", categories);
@@ -22,9 +27,9 @@ export default function ItemGrid({ items, categories, search, page }: Props) {
   //Remember when declaring an array state variable with the useState hook, use a generic to type the array as done for filteredItems below.
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
   // const [search, setSearch] = useState("");
-  const [selectedCategories, setSelectedCatagories] = useState<any[]>([]);
 
   //Handlers
+  const [selectedCategories, setSelectedCatagories] = useState<any[]>([]);
 
   // const handleSearchValueChange = (e: {
   //   target: { value: SetStateAction<string> };
@@ -32,19 +37,6 @@ export default function ItemGrid({ items, categories, search, page }: Props) {
   //   setSearch(e.target.value);
   //   console.log("search value is:", search);
   // };
-
-  const handleCategoryBtnClick = (selectedCategory: string) => {
-    if (selectedCategories.includes(selectedCategory)) {
-      let categories = selectedCategories.filter(
-        (el) => el != selectedCategory
-      );
-      setSelectedCatagories(categories);
-    } else {
-      setSelectedCatagories([...selectedCategories, selectedCategory]);
-    }
-    console.log("(ItemGrid.tsx)", { selectedCategory });
-    console.log("(ItemGrid.tsx)", { selectedCategories });
-  };
 
   // useEffect(() => {
   //   const filtered = productItems.filter((item) => {
@@ -77,6 +69,7 @@ export default function ItemGrid({ items, categories, search, page }: Props) {
             pathname: "/home",
             query: {
               ...(search ? { search } : {}),
+              ...(filter ? { filter } : {}),
               page: page > 1 ? page - 1 : 1,
             },
           }}
@@ -90,6 +83,7 @@ export default function ItemGrid({ items, categories, search, page }: Props) {
             pathname: "/home",
             query: {
               ...(search ? { search } : {}),
+              ...(filter ? { filter } : {}),
               page: page + 1,
             },
           }}
@@ -100,21 +94,21 @@ export default function ItemGrid({ items, categories, search, page }: Props) {
       </div>
 
       <div className="  w-full ">
-        <div className=" flex items-center justify-between">
-          {/* The serchbar component is imported and the state variable and handler function are passed to it */}
-          {/* <SearchBar
+        {/* <div className=" flex items-center justify-between"> */}
+        {/* The serchbar component is imported and the state variable and handler function are passed to it */}
+        {/* <SearchBar
           searchProp={search}
           onSearchValueChange={handleSearchValueChange}
         /> */}
 
-          <FilterBar
+        {/* <FilterBar
             items={items}
             onCategoryBtnClick={handleCategoryBtnClick}
             selectedCategories={selectedCategories}
             categories={categories}
-          />
-          <div className=" text-white">sort stuff</div>
-        </div>
+          /> */}
+        {/* <div className=" text-white">sort stuff</div> */}
+        {/* </div> */}
 
         {/* Use can nest imported client components like this and pass the mapped data to it */}
         <div

@@ -21,7 +21,9 @@ export default function Footer() {
             multiple-third-party-api
           </Link>
         </div>
-        <span className=" justify-self-center text-white">copyright c</span>
+        <span className=" justify-self-center text-white">
+          © copyright yyyy
+        </span>
         <div className="flex w-20 justify-between items-center justify-self-end text-white">
           <Link href={"#"} className="hover:text-blue-400 transition-colors">
             <FaGlobe />

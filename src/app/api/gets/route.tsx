@@ -5,7 +5,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    const searchQuery = request.nextUrl.searchParams.get("searchQuery");
+    // const url = new URL(request.url);
+    let searchQuery = request.nextUrl.searchParams.get("searchQuery");
+    if (searchQuery === "undefined") {
+      searchQuery = null;
+    }
     console.log(
       "(app/api/gets) searchQuery passed from client into endpint is:",
       searchQuery
@@ -21,7 +25,29 @@ export async function GET(request) {
       limit
     );
 
-    const products = await getProducts({ searchQuery, page, limit }); //await was added to this line as the getProducts function was made async in the sampleData.tsx to test the loading state using a timeout
+    let filter = request.nextUrl.searchParams.getAll("filter");
+    if (filter.includes("undefined")) {
+      filter = null;
+    } else {
+      filter = Array.from(filter);
+    }
+    console.log(
+      "(app/api/gets) filter passed from client into endpint is:",
+      filter
+    );
+    const sort = request.nextUrl.searchParams.get("sort");
+    console.log(
+      "(app/api/gets) sort passed from client into endpint is:",
+      sort
+    );
+
+    const products = await getProducts({
+      searchQuery,
+      page,
+      limit,
+      filter,
+      sort,
+    }); //await was added to this line as the getProducts function was made async in the sampleData.tsx to test the loading state using a timeout
     // console.log("(app/api/gets) products variable data returned from getProducts() in sampleData lib is:", products);
     const categories = getUniqueCategories();
     // console.log(

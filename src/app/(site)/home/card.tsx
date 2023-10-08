@@ -6,11 +6,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaBolt } from "react-icons/fa6";
 
-type Props = { prop1: string | number; prop2?: any; prop3: string };
+type Props = {
+  prop1: string | number;
+  prop2?: any;
+  prop3: string;
+  prop4: number;
+};
 
 //The function takes a prop from the parent. If the data passed in as 'prop1' doesnt exist, a div saying 'empty' is returned.
 // Components have only one parameter which is the props object. Its parameters and types are defined above and passed in. the ? next to prop two makes it optional
-export default function Card({ prop1, prop2, prop3 }: Props) {
+export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
   // const [count, setCount] = useState(1);
   // const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
   //   event.preventDefault();
@@ -43,6 +48,7 @@ export default function Card({ prop1, prop2, prop3 }: Props) {
       </div>
       <div className=" grow relative  p-2">
         <h1 className=" font-black">{prop1}</h1>
+        <span>{prop4}</span>
         {/* onClick={handleClick} */}
         <button className=" border-2 border-white rounded-xl px-2 my-2">
           <h2>

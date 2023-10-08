@@ -4,21 +4,53 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Card from "../(site)/home/card";
 import { getData } from "../(site)/home/page";
+// import { useRouter } from "next/navigation";
+
+type Props = {
+  search: string | undefined;
+  initialItems: any[] | undefined;
+  filter?: string;
+  totalItems: number;
+};
 
 export default function InfiniteScrollItemGrid({
   search,
   initialItems,
-}: {
-  search: string | undefined;
-  initialItems: any[] | undefined;
-}) {
+  filter,
+  totalItems,
+}: Props) {
   const [items, setItems] = useState(initialItems);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView();
+  // const router = useRouter();
+
+  //this useEffect works to sort (kind of) but try to get sort from search params in page.tsx and send to getProducts() in sampleData.tsx via the endpoint. The aim is to sort the data on the server before its returned to the client. if that doesnt workm revisit this client side sorting and get it to work.
+  // useEffect(() => {
+  //   const url = new URL(window.location.href);
+  //   // const searchParams = new URLSearchParams(url.search);
+  //   // const sort = searchParams.get("sort");
+  //   // console.log("(InfiniteScrollItemGrid.tsx) sort:", sort);
+  //   const searchParams = new URLSearchParams(url.search);
+  //   console.log("ininfite", searchParams);
+
+  //   switch (searchParams.get("sort")) {
+  //     case "relevance":
+  //       break;
+  //     case "price-asc":
+  //       setItems([...items].sort((a, b) => a.price - b.price));
+  //       break;
+  //     case "price-desc":
+  //       setItems([...items].sort((a, b) => b.price - a.price));
+  //       break;
+
+  //     default:
+  //       setItems(items);
+  //   }
+  // }, [router]);
 
   async function loadMoreItems() {
     const next = page + 1;
-    const items = await getData({ query: search, page: next });
+    const items = await getData({ query: search, page: next, filter });
     console.log("More items loaded", items);
     if (items.products?.length) {
       setPage(next);
@@ -35,8 +67,13 @@ export default function InfiniteScrollItemGrid({
     }
   }, [inView]);
 
+  // useEffect(() => {
+  //   console.log("ITEMS CHANGED");
+  // }, [items]);
+
   return (
-    <>
+    <div className=" flex-col w-full">
+      <div> {totalItems} found</div>
       <div
         className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-2 py-2
        bg-blue-300 w-full "
@@ -46,6 +83,7 @@ export default function InfiniteScrollItemGrid({
             prop1={item["title"]}
             prop2={item["id"]}
             prop3={item["thumbnail"]}
+            prop4={item["price"]}
             key={`item-${idx}`}
           />
           //   <li key={item.id.toString()} className="relative">
@@ -73,9 +111,10 @@ export default function InfiniteScrollItemGrid({
         ))}
 
         {/* loading spinner */}
+        {/* something in the below classname is causing the far right column to get smaller as the page is made smaller */}
         <div
           ref={ref}
-          className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4"
+          className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4 bg-red-300 mb-8"
         >
           <svg
             aria-hidden="true"
@@ -96,6 +135,6 @@ export default function InfiniteScrollItemGrid({
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-    </>
+    </div>
   );
 }

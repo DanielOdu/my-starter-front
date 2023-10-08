@@ -272,7 +272,7 @@ let products: Item[] = [
     title: "Fog Scent Xpressio Perfume",
     description:
       "Product details of Best Fog Scent Xpressio Perfume 100ml For Men cool long lasting perfumes for Men",
-    price: 13,
+    price: 2,
     discountPercentage: 8.14,
     rating: 4.59,
     stock: 61,
@@ -1110,7 +1110,7 @@ let products: Item[] = [
     title: "FREE FIRE T Shirt",
     description:
       "quality and professional print - It doesn't just look high quality, it is high quality.",
-    price: 10,
+    price: 1,
     discountPercentage: 14.72,
     rating: 4.52,
     stock: 128,
@@ -1698,7 +1698,9 @@ let products: Item[] = [
     stock: 9,
     brand: "Cuff Butterfly",
     category: "womens-jewellery",
-    thumbnail: "https://i.dummyjson.com/data/products/80/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/80/1.jpg",
       "https://i.dummyjson.com/data/products/80/2.jpg",
@@ -1718,7 +1720,9 @@ let products: Item[] = [
     stock: 78,
     brand: "Designer Sun Glasses",
     category: "sunglasses",
-    thumbnail: "https://i.dummyjson.com/data/products/81/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/81/1.jpg",
       "https://i.dummyjson.com/data/products/81/2.jpg",
@@ -1738,7 +1742,9 @@ let products: Item[] = [
     stock: 78,
     brand: "Designer Sun Glasses",
     category: "sunglasses",
-    thumbnail: "https://i.dummyjson.com/data/products/82/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/82/1.jpg",
       "https://i.dummyjson.com/data/products/82/2.webp",
@@ -1758,7 +1764,9 @@ let products: Item[] = [
     stock: 115,
     brand: "mastar watch",
     category: "sunglasses",
-    thumbnail: "https://i.dummyjson.com/data/products/83/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/83/1.jpg",
       "https://i.dummyjson.com/data/products/83/2.jpg",
@@ -2122,134 +2130,18 @@ let products: Item[] = [
 export async function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-// TRY TO INCORPORATE FUZZY MATCHING IN THE FOLLOWING FUNCTION fuse.js?
-// export const getProducts = async (searchQuery: string) => {
-//   await wait(2000);
-//   // console.log("(app/lib/sampleData.tsx) getProducts() triggered");
-//   // console.log(
-//   //   "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
-//   //   searchQuery
-//   // );
-//   if (searchQuery == "undefined") {
-//     return products;
-//   } else {
-//     const result = products.filter((product) =>
-//       Object.values(product).some((val) =>
-//         String(val).toLowerCase().includes(searchQuery.toLowerCase())
-//       )
-//     );
-//     return result;
-//   }
-// };
-
-//works
-// export const getProducts = async ({
-//   searchQuery,
-//   page,
-//   limit,
-// }: {
-//   searchQuery?: string;
-//   page: number;
-//   limit: number;
-// }) => {
-//   await wait(2000);
-//   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
-//   console.log(
-//     "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
-//     searchQuery
-//   );
-//   console.log(
-//     "(app/lib/sampleData.tsx) page passed into getProducts() is:",
-//     page
-//   );
-//   console.log(
-//     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
-//     limit
-//   );
-//   if (searchQuery === "undefined") {
-//     console.log("sampleData, searchQuery === undefined");
-//     return products;
-//   } else {
-//     console.log("sampleData, searchQuery is defined");
-//     const result = products.filter((product) =>
-//       Object.values(product).some((val) =>
-//         String(val).toLowerCase().includes(searchQuery.toLowerCase())
-//       )
-//     );
-//     return result;
-//   }
-// };
-
-//works - need to work on order of conditions
-// export const getProducts = async ({
-//   searchQuery,
-//   page = 1,
-//   limit = 10, //change to 12 as in home/page/tsx?
-// }: {
-//   searchQuery?: string | undefined;
-//   page: number;
-//   limit: number;
-// }) => {
-//   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
-//   console.log(
-//     "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
-//     searchQuery
-//   );
-//   console.log(
-//     "(app/lib/sampleData.tsx) page passed into getProducts() is:",
-//     page
-//   );
-//   console.log(
-//     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
-//     limit
-//   );
-//   try {
-//     const skip = (page - 1) * limit;
-//     let result = products.slice(skip, skip + limit);
-//     // console.log("result", result);
-
-//     // if (searchQuery) {
-//     //   result = result.filter((product) =>
-//     //     Object.values(product).some((val) =>
-//     //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
-//     //     )
-//     //   );
-//     // }
-
-//     if (searchQuery === "undefined") {
-//       console.log("sampleData, searchQuery === undefined");
-//       return result;
-//     } else {
-//       console.log("sampleData, searchQuery is defined");
-//       const searchedProducts = products.filter((product) =>
-//         Object.values(product).some((val) =>
-//           String(val).toLowerCase().includes(searchQuery.toLowerCase())
-//         )
-//       );
-//       //   return result;
-//       console.log(
-//         "searchedProducts - array length:",
-//         searchedProducts.length,
-//         searchedProducts
-//       );
-//       // return {
-//       //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
-//       // };
-//       return searchedProducts;
-//     }
-//   } catch (error) {
-//     return { error };
-//   }
-// };
 export const getProducts = async ({
   searchQuery,
   page = 1,
   limit = 12,
+  filter,
+  sort = "relevance",
 }: {
-  searchQuery?: string | undefined;
+  searchQuery?: string | undefined | null;
   page: number;
   limit: number;
+  filter?: string[] | undefined | null;
+  sort: string;
 }) => {
   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
   console.log(
@@ -2264,116 +2156,231 @@ export const getProducts = async ({
     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
     limit
   );
-  try {
-    // console.log("result", result);
+  console.log(
+    "(app/lib/sampleData.tsx) filter passed into getProducts() is:",
+    filter
+  );
+  console.log(
+    "(app/lib/sampleData.tsx) sort passed into getProducts() is:",
+    sort
+  );
+  // -------- ths is the original code before chat gpt suggestion below. this doesnt filter.
+  //   try {
+  //     // console.log("result", result);
 
-    // if (searchQuery) {
-    //   result = result.filter((product) =>
-    //     Object.values(product).some((val) =>
-    //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
-    //     )
-    //   );
-    // }
+  //     // if (searchQuery) {
+  //     //   result = result.filter((product) =>
+  //     //     Object.values(product).some((val) =>
+  //     //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
+  //     //     )
+  //     //   );
+  //     // }
 
-    if (searchQuery === "undefined") {
-      console.log(
-        "(sampleData.tsx/getProducts()) searchQuery === 'undefined', limit is:",
-        limit
-      );
-      const skip = (page - 1) * limit;
-      let result = products.slice(skip, skip + limit);
-      return result;
-    } else {
-      const searchedProducts = products.filter((product) =>
-        Object.values(product).some((val) =>
-          String(val).toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      );
-      const skip = (page - 1) * limit;
-      let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
-      //   return result;
-      console.log(
-        "(sampleData.tsx/getProducts()) searchQuery is defined. searchedProducts array length:",
-        searchedProducts.length,
-        "sliced to return:",
-        slicedSearchedProducts.length
-      );
-      // return {
-      //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
-      // };
-      return slicedSearchedProducts;
-    }
-  } catch (error) {
-    return { error };
+  //     if (searchQuery === "undefined") {
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) searchQuery === 'undefined', limit is:",
+  //         limit
+  //       );
+  //       const skip = (page - 1) * limit;
+  //       let result = products.slice(skip, skip + limit);
+  //       return result;
+  //     } else {
+  //       const searchedProducts = products.filter((product) =>
+  //         Object.values(product).some((val) =>
+  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
+  //         )
+  //       );
+  //       const skip = (page - 1) * limit;
+  //       let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
+  //       //   return result;
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) searchQuery is defined. searchedProducts array length:",
+  //         searchedProducts.length,
+  //         "sliced to return:",
+  //         slicedSearchedProducts.length
+  //       );
+  //       // return {
+  //       //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
+  //       // };
+  //       return slicedSearchedProducts;
+  //     }
+  //   } catch (error) {
+  //     return { error };
+  //   }
+  // };
+
+  ////Chatgpt suggestion below. works but with some bugs (does not render items without filter being appied..)
+
+  //   try {
+  //     let filteredProducts = [...products]; // Copy the products array
+
+  //     // Filter based on searchQuery if it's defined
+  //     if (searchQuery && searchQuery !== "undefined") {
+  //       filteredProducts = filteredProducts.filter((product) =>
+  //         Object.values(product).some((val) =>
+  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
+  //         )
+  //       );
+  //     }
+
+  //     // Filter based on filter strings
+  //     if (filter.length > 0) {
+  //       filteredProducts = filteredProducts.filter((product) =>
+  //         filter.some((val) =>
+  //           String(product.category).toLowerCase().includes(val.toLowerCase())
+  //         )
+  //       );
+  //     }
+
+  //     const skip = (page - 1) * limit;
+  //     const slicedProducts = filteredProducts.slice(skip, skip + limit);
+  //     console.log(
+  //       "(app/lib/sampleData.tsx) sliced products are:",
+  //       slicedProducts.length
+  //     );
+
+  //     return slicedProducts;
+  //   } catch (error) {
+  //     return { error };
+  //   }
+  // };
+
+  //-------------------------------------------------------------------------------
+  //This is me trying to manually edit the function to include filters -----
+  //   let sortedProducts;
+  //   if (sort === "price-asc") {
+  //     sortedProducts = products.slice().sort((a, b) => a.price - b.price);
+  //     // console.log(
+  //     //   "products low to high",
+  //     //   products.slice().sort((a, b) => a.price - b.price)
+  //     // );
+  //   } else if (sort === "price-desc") {
+  //     sortedProducts = products.slice().sort((a, b) => b.price - a.price);
+  //     // console.log(
+  //     //   "producsts high to low",
+  //     //   products.slice().sort((b, a) => b.price - a.price)
+  //     // );
+  //   } else if (sort === ("relevance" || "undefined")) {
+  //     sortedProducts = products;
+  //   }
+  //   try {
+  //     if (searchQuery === "undefined" && filter.includes("undefined")) {
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) searchQuery === 'undefined', filter includes 'undefined'. limit is:",
+  //         limit
+  //       );
+  //       // console.log("(sampleData.tsx/getProducts()), filter:", typeof filter);
+  //       // console.log(filter.includes("undefined"));
+  //       // console.log("filter length:", filter.length, filter);
+  //       const skip = (page - 1) * limit;
+  //       let result = sortedProducts!.slice(skip, skip + limit);
+  //       console.log("result", result);
+  //       return result;
+  //     } else if (searchQuery !== "undefined" && filter.includes("undefined")) {
+  //       const searchedProducts = products.filter((product) =>
+  //         Object.values(product).some((val) =>
+  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
+  //         )
+  //       );
+  //       const skip = (page - 1) * limit;
+  //       let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
+
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) searchQuery is defined. searchedProducts array length:",
+  //         searchedProducts.length,
+  //         "sliced to return:",
+  //         slicedSearchedProducts.length
+  //       );
+
+  //       if (slicedSearchedProducts.length === 0) {
+  //         console.log("no products found from search");
+  //       }
+  //       return slicedSearchedProducts;
+  //     } else if (searchQuery === "undefined" && !filter.includes("undefined")) {
+  //       let filteredProducts = [...products];
+
+  //       filteredProducts = filteredProducts.filter((product) =>
+  //         filter.some((val) =>
+  //           String(product.category).toLowerCase().includes(val.toLowerCase())
+  //         )
+  //       );
+  //       const skip = (page - 1) * limit;
+  //       let slicedFilteredProducts = filteredProducts.slice(skip, skip + limit);
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) filter is defined. filteredProducts array length:",
+  //         filteredProducts.length,
+  //         "sliced to return:",
+  //         slicedFilteredProducts.length
+  //       );
+  //       if (slicedFilteredProducts.length === 0) {
+  //         console.log("no products found from filter");
+  //       }
+  //       return slicedFilteredProducts;
+  //     } else if (searchQuery !== "undefined" && !filter.includes("undefined")) {
+  //       const filteredProducts = products.filter((product) => {
+  //         const searchMatch = Object.values(product).some((value) => {
+  //           if (typeof value === "string") {
+  //             return value.toLowerCase().includes(searchQuery.toLowerCase());
+  //           }
+  //           return false;
+  //         });
+  //         const categoryMatch = filter.some((filterValue) =>
+  //           product.category.toLowerCase().includes(filterValue.toLowerCase())
+  //         );
+  //         return searchMatch && categoryMatch;
+  //       });
+  //       console.log(
+  //         "(sampleData.tsx/getProducts()) searchQuery is defined & filter is defined."
+  //       );
+  //       if (filteredProducts.length === 0) {
+  //         console.log("no products found from search & filter");
+  //       }
+  //       const skip = (page - 1) * limit;
+  //       let slicedFilteredProducts = filteredProducts.slice(skip, skip + limit);
+  //       return slicedFilteredProducts;
+  //     }
+  //   } catch (error) {
+  //     return { error };
+  //   }
+  // };
+
+  //another ChatGPT suggestion
+  // Filter products based on the searchQuery
+  let filteredProducts = products;
+  if (searchQuery) {
+    filteredProducts = filteredProducts.filter((product) =>
+      Object.values(product).some((val) =>
+        String(val).toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
   }
+
+  // // Apply filters
+  if (filter) {
+    filteredProducts = filteredProducts.filter(
+      (product) => filter.includes(product.category) // Assuming 'category' is a property in your product
+    );
+  }
+
+  // // Sort products based on sortOrder
+  if (sort === "price-asc") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  } else if (sort === "price-desc") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  } // Add more sorting conditions if needed
+
+  // Calculate pagination
+  const totalItems = filteredProducts.length;
+  const skip = (page - 1) * limit;
+  const slicedProducts = filteredProducts.slice(skip, skip + limit);
+
+  console.log("total items", totalItems);
+  console.log("sliced products length:", slicedProducts.length);
+  return {
+    products: slicedProducts,
+    totalItems,
+  };
 };
-
-// Sample data - replace this with your actual data
-// const moviesData = [
-//   { id: 1, title: "Movie 1", director: "Director 1" },
-//   { id: 2, title: "Movie 2", director: "Director 2" },
-//   // Add more movie objects as needed
-// ];
-
-// Function to get movies with optional query, page, and limit parameters
-// export const getMovies = async ({
-//   searchQuery,
-//   page = 1,
-//   limit = 10,
-// }: {
-//   searchQuery?: string;
-//   page: number;
-//   limit: number;
-// }) => {
-//   try {
-//     // Simulate a delay similar to your sleep function
-//     // await sleep(1000);
-
-//     // Apply filtering and pagination here based on the query, page, and limit
-
-//     // In this example, we'll just return the data as is without any filtering or pagination
-//     const skip = (page - 1) * limit;
-//     const slicedData = products.slice(skip, skip + limit);
-
-//     return { result: slicedData };
-//   } catch (error) {
-//     return { error };
-//   }
-// };
-
-// export const getProducts = async ({
-//   searchQuery,
-//   page = 1,
-//   limit = 10,
-// }: {
-//   searchQuery?: string;
-//   page: number;
-//   limit: number;
-// }) => {
-//   try {
-//     // Simulate a delay similar to your sleep function
-//     // await sleep(1000);
-
-//     // Apply filtering based on the search query
-//     if (!searchQuery || searchQuery === "undefined") {
-//       // Return all products if no search query provided
-//       const skip = (page - 1) * limit;
-//       const slicedData = products.slice(skip, skip + limit);
-//       return { products: slicedData };
-//     } else {
-//       const result = products.filter((product) =>
-//         Object.values(product).some((val) =>
-//           String(val).toLowerCase().includes(searchQuery.toLowerCase())
-//         )
-//       );
-//       return { products: result };
-//     }
-//   } catch (error) {
-//     return { error };
-//   }
-// };
-
-//-------------------------------------------------------------------------------
 
 //Get products using a function declaration. These are hoisted and can be invoked before being defined.
 // export async function getProducts() {

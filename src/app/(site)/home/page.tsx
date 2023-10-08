@@ -1,21 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
-import ItemGrid from "@/app/components/ItemGrid";
+import PaginationItemGrid from "@/app/components/PaginationItemGrid";
 import AddItemForm from "@/app/components/AddItemForm";
 import getDomain from "@/app/lib/getDomain";
 import HeroCarousel from "@/app/components/HeroCarousel";
 import ServerSearch from "@/app/components/ServerSearch";
 import InfiniteScrollItemGrid from "@/app/components/InfiniteScrollItemGrid";
+import FilterBar from "@/app/components/FilterBar";
+import SortMenu from "@/app/components/SortMenu";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 export async function getData({
   page = 1,
   limit = 12,
   query,
+  filter,
+  sort,
 }: {
   page: number;
   limit?: number;
-  query?: string | undefined;
+  query?: string | undefined | null;
+  filter?: string;
+  sort?: string;
 }) {
   //save the returned value from the imported function to the 'domain' variable
   const domain = getDomain();
@@ -24,8 +30,9 @@ export async function getData({
   //What is the endpoint that has access to the data?
   const endpoint = `${domain}/api/gets?searchQuery=${encodeURIComponent(
     searchQuery
-  )}&page=${page}&limit=${limit}`;
+  )}&page=${page}&limit=${limit}&filter=${filter}&sort=${sort}`;
   console.log("(home/page.tsx) getData() triggered. endpoint =", endpoint);
+  // console.log("type of endpoint is:", typeof endpoint);
 
   //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
   //There are different fetch caching options:
@@ -54,7 +61,14 @@ export async function getData({
 
   //This return statement assumes the response is returned as json. If you're getting errors, its worth checking this in your endpoint.
   // console.log("Returning data");
-  return res.json();
+
+  const data = await res.json();
+  // console.log("data from response", data);
+  const products = data.products.products; // Access the products array
+  // console.log("data.products", products);
+  const totalItems = data.products.totalItems; // Access the totalItems count
+  const categories = data.categories;
+  return { products, totalItems, categories };
 }
 
 //Your default function that renders the content will also be async and will 'await' the getData function above in order to have access to the data in the component.
@@ -69,23 +83,40 @@ export default async function HomePage({
     typeof searchParams.limit === "string" ? Number(searchParams.limit) : 12;
   const search =
     typeof searchParams.search === "string" ? searchParams.search : undefined;
-  // console.log(
-  //   "(home/page.tsx) searchparams in default HomePage function is:",
-  //   searchParams
-  // );
+  const filter =
+    typeof searchParams.filter === "string" ? searchParams.filter : undefined;
+  const sort =
+    typeof searchParams.sort === "string" ? searchParams.sort : undefined;
+  console.log(
+    "(home/page.tsx) searchparams in default HomePage function is:",
+    searchParams
+  );
 
-  const data = await getData({ page, limit, query: search });
+  const { products, totalItems, categories } = await getData({
+    page,
+    limit,
+    query: search,
+    filter,
+    sort,
+  });
   // console.log(
   //   "(home/page.tsx) data returned from getData() in default HomePage function - lenth = ",
   //   data.products.length,
   //   data
   // );
+
+  console.log("products length", products.length);
+  console.log("total items", totalItems);
+  console.log("categories", categories);
   // const items = data && data.products ? [...data.products] : [];
-  const items = Array.isArray(data.products) ? [...data.products] : [];
+  const items = products;
+  // const items = Array.isArray(data.products) ? [...data.products] : [];
   // console.log("items", items);
-  const categories = data && data.categories ? [...data.categories] : [];
+
+  // const categories = data && data.categories ? [...data.categories] : [];
   // console.log("(home/page.tsx) categories are:", categories);
   // console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
+
   return (
     <main>
       <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
@@ -106,19 +137,36 @@ export default async function HomePage({
       {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
       <ServerSearch search={search} />
 
+      <FilterBar
+        items={items}
+        categories={categories}
+        search={search}
+        page={page}
+        // filter={filter}
+        // onCategoryBtnClick={handleCategoryBtnClick}
+        // selectedCategories={selectedCategories}
+      />
+      <SortMenu sortOption={sort} />
+
       {/* pagination grid ------------ */}
       {/* <div className=" flex h-auto overflow-auto  ">
-        <ItemGrid
+        <PaginationItemGrid
           items={items}
           categories={categories}
           search={search}
           page={page}
+          filter={filter}
         />
       </div> */}
 
       {/* Infinite scroll grid ---------- */}
-      <div className=" flex h-auto overflow-auto  ">
-        <InfiniteScrollItemGrid search={search} initialItems={items} />
+      <div key={Math.random()} className=" flex h-auto overflow-auto  ">
+        <InfiniteScrollItemGrid
+          search={search}
+          initialItems={items}
+          filter={filter}
+          totalItems={totalItems}
+        />
       </div>
 
       {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
