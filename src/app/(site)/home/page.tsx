@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import PaginationItemGrid from "@/app/components/PaginationItemGrid";
 import AddItemForm from "@/app/components/AddItemForm";
@@ -8,6 +7,8 @@ import ServerSearch from "@/app/components/ServerSearch";
 import InfiniteScrollItemGrid from "@/app/components/InfiniteScrollItemGrid";
 import FilterBar from "@/app/components/FilterBar";
 import SortMenu from "@/app/components/SortMenu";
+import ResetBtn from "@/app/components/ResetBtn";
+import { SearchProvider } from "@/app/context/search-context";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 export async function getData({
@@ -26,13 +27,15 @@ export async function getData({
   //save the returned value from the imported function to the 'domain' variable
   const domain = getDomain();
   const searchQuery = query;
-  // console.log("(home/page.tsx) searchQuery in getData function is:", searchQuery);
+  console.log(
+    "(home/page.tsx) searchQuery in getData function is:",
+    searchQuery
+  );
   //What is the endpoint that has access to the data?
   const endpoint = `${domain}/api/gets?searchQuery=${encodeURIComponent(
-    searchQuery
+    searchQuery as string
   )}&page=${page}&limit=${limit}&filter=${filter}&sort=${sort}`;
   console.log("(home/page.tsx) getData() triggered. endpoint =", endpoint);
-  // console.log("type of endpoint is:", typeof endpoint);
 
   //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
   //There are different fetch caching options:
@@ -45,8 +48,6 @@ export async function getData({
   // const res = await fetch(endpoint); //no store default option
   // const res = await fetch(endpoint, { next: { revalidate: 10 } }); //revalidate after 10 seconds
   const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
-  // .then((response) => response.json())
-  // .then((json) => console.log(json));
 
   //Check that the response is OK, if not, throw an error
   if (!res.ok) {
@@ -63,10 +64,8 @@ export async function getData({
   // console.log("Returning data");
 
   const data = await res.json();
-  // console.log("data from response", data);
-  const products = data.products.products; // Access the products array
-  // console.log("data.products", products);
-  const totalItems = data.products.totalItems; // Access the totalItems count
+  const products = data.productData.products; // Access the products array
+  const totalItems = data.productData.totalItems; // Access the totalItems count
   const categories = data.categories;
   return { products, totalItems, categories };
 }
@@ -77,6 +76,9 @@ export default async function HomePage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  console.log(
+    "(home/page.tsx) HomePage() ---------------------- Start of data flow ------------------------"
+  );
   const page =
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
   const limit =
@@ -105,51 +107,58 @@ export default async function HomePage({
   //   data
   // );
 
-  console.log("products length", products.length);
-  console.log("total items", totalItems);
-  console.log("categories", categories);
-  // const items = data && data.products ? [...data.products] : [];
-  const items = products;
-  // const items = Array.isArray(data.products) ? [...data.products] : [];
-  // console.log("items", items);
+  console.log(
+    "(home/page.tsx) HomePage() total products returned to home",
+    totalItems
+  );
+  console.log(
+    "(home/page.tsx) HomePage() products returned to home length",
+    products.length
+  );
 
-  // const categories = data && data.categories ? [...data.categories] : [];
+  const items = products;
+
+  // console.log("items", items);
   // console.log("(home/page.tsx) categories are:", categories);
   // console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
 
+  console.log(
+    "(home/page.tsx) HomePage() ---------------------- end of data flow ------------------------"
+  );
   return (
-    <main>
-      <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
-      <h3 className=" font-black uppercase">
-        "Gets" dummy data from the endpoint api/gets
-      </h3>
-      <HeroCarousel />
-      {/* This is a way to access the data in the component. It checks if data is true and if so, displays the json as a string */}
-      {/* {data && JSON.stringify(data)} */}
+    <SearchProvider initialValue={search}>
+      <main>
+        <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
+        <h3 className=" font-black uppercase">
+          "Gets" dummy data from the endpoint api/gets
+        </h3>
+        <HeroCarousel />
+        {/* This is a way to access the data in the component. It checks if data is true and if so, displays the json as a string */}
+        {/* {data && JSON.stringify(data)} */}
 
-      {/* Items can also be mapped over like this */}
+        {/* Items can also be mapped over like this */}
 
-      {/*<li key={`post-${idx}`}>
+        {/*<li key={`post-${idx}`}>
               <p>{item.title}</p>
                <p>{item.description}</p>
              </li> */}
 
-      {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
-      <ServerSearch search={search} />
+        {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+        <ServerSearch search={search} />
 
-      <FilterBar
-        items={items}
-        categories={categories}
-        search={search}
-        page={page}
-        // filter={filter}
-        // onCategoryBtnClick={handleCategoryBtnClick}
-        // selectedCategories={selectedCategories}
-      />
-      <SortMenu sortOption={sort} />
+        <FilterBar
+          items={items}
+          categories={categories}
+          search={search}
+          page={page}
+        />
 
-      {/* pagination grid ------------ */}
-      {/* <div className=" flex h-auto overflow-auto  ">
+        <ResetBtn />
+
+        <SortMenu sortOption={sort} />
+
+        {/* pagination grid ------------ */}
+        {/* <div className=" flex h-auto overflow-auto  ">
         <PaginationItemGrid
           items={items}
           categories={categories}
@@ -159,26 +168,27 @@ export default async function HomePage({
         />
       </div> */}
 
-      {/* Infinite scroll grid ---------- */}
-      <div key={Math.random()} className=" flex h-auto overflow-auto  ">
-        <InfiniteScrollItemGrid
-          search={search}
-          initialItems={items}
-          filter={filter}
-          totalItems={totalItems}
+        {/* Infinite scroll grid ---------- */}
+        <div key={Math.random()} className=" flex h-auto overflow-auto  ">
+          <InfiniteScrollItemGrid
+            search={search}
+            initialItems={items}
+            filter={filter}
+            totalItems={totalItems}
+          />
+        </div>
+
+        {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
+
+        <Image
+          src="/vercel.svg"
+          alt="Vercel Logo"
+          className="dark:invert"
+          width={100}
+          height={24}
+          priority
         />
-      </div>
-
-      {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
-
-      <Image
-        src="/vercel.svg"
-        alt="Vercel Logo"
-        className="dark:invert"
-        width={100}
-        height={24}
-        priority
-      />
-    </main>
+      </main>
+    </SearchProvider>
   );
 }

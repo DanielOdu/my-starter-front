@@ -1786,7 +1786,9 @@ let products: Item[] = [
     stock: 64,
     brand: "mastar watch",
     category: "sunglasses",
-    thumbnail: "https://i.dummyjson.com/data/products/84/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/84/1.jpg",
       "https://i.dummyjson.com/data/products/84/2.jpg",
@@ -1804,7 +1806,9 @@ let products: Item[] = [
     stock: 92,
     brand: "LouisWill",
     category: "sunglasses",
-    thumbnail: "https://i.dummyjson.com/data/products/85/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/85/1.jpg",
       "https://i.dummyjson.com/data/products/85/2.jpg",
@@ -1822,7 +1826,9 @@ let products: Item[] = [
     stock: 22,
     brand: "Car Aux",
     category: "automotive",
-    thumbnail: "https://i.dummyjson.com/data/products/86/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/86/1.jpg",
       "https://i.dummyjson.com/data/products/86/2.webp",
@@ -1842,7 +1848,9 @@ let products: Item[] = [
     stock: 37,
     brand: "W1209 DC12V",
     category: "automotive",
-    thumbnail: "https://i.dummyjson.com/data/products/87/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/87/1.jpg",
       "https://i.dummyjson.com/data/products/87/2.jpg",
@@ -1862,7 +1870,9 @@ let products: Item[] = [
     stock: 42,
     brand: "TC Reusable",
     category: "automotive",
-    thumbnail: "https://i.dummyjson.com/data/products/88/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/88/1.jpg",
       "https://i.dummyjson.com/data/products/88/2.jpg",
@@ -1882,7 +1892,9 @@ let products: Item[] = [
     stock: 79,
     brand: "TC Reusable",
     category: "automotive",
-    thumbnail: "https://i.dummyjson.com/data/products/89/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/89/1.jpg",
       "https://i.dummyjson.com/data/products/89/2.jpg",
@@ -1902,7 +1914,9 @@ let products: Item[] = [
     stock: 63,
     brand: "Neon LED Light",
     category: "automotive",
-    thumbnail: "https://i.dummyjson.com/data/products/90/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/90/1.jpg",
       "https://i.dummyjson.com/data/products/90/2.jpg",
@@ -1922,7 +1936,9 @@ let products: Item[] = [
     stock: 115,
     brand: "METRO 70cc Motorcycle - MR70",
     category: "motorcycle",
-    thumbnail: "https://i.dummyjson.com/data/products/91/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/91/1.jpg",
       "https://i.dummyjson.com/data/products/91/2.jpg",
@@ -1942,7 +1958,9 @@ let products: Item[] = [
     stock: 22,
     brand: "BRAVE BULL",
     category: "motorcycle",
-    thumbnail: "https://i.dummyjson.com/data/products/92/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/92/1.jpg",
       "https://i.dummyjson.com/data/products/92/2.jpg",
@@ -1961,7 +1979,9 @@ let products: Item[] = [
     stock: 127,
     brand: "shock absorber",
     category: "motorcycle",
-    thumbnail: "https://i.dummyjson.com/data/products/93/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/93/1.jpg",
       "https://i.dummyjson.com/data/products/93/2.jpg",
@@ -1981,7 +2001,9 @@ let products: Item[] = [
     stock: 109,
     brand: "JIEPOLLY",
     category: "motorcycle",
-    thumbnail: "https://i.dummyjson.com/data/products/94/thumbnail.webp",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/94/1.webp",
       "https://i.dummyjson.com/data/products/94/2.jpg",
@@ -2000,7 +2022,9 @@ let products: Item[] = [
     stock: 144,
     brand: "Xiangle",
     category: "motorcycle",
-    thumbnail: "https://i.dummyjson.com/data/products/95/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/95/1.jpg",
       "https://i.dummyjson.com/data/products/95/2.jpg",
@@ -2020,7 +2044,9 @@ let products: Item[] = [
     stock: 96,
     brand: "lightingbrilliance",
     category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/96/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/96/1.jpg",
       "https://i.dummyjson.com/data/products/96/2.jpg",
@@ -2040,7 +2066,9 @@ let products: Item[] = [
     stock: 146,
     brand: "Ifei Home",
     category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/97/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/97/1.jpg",
       "https://i.dummyjson.com/data/products/97/2.jpg",
@@ -2060,7 +2088,9 @@ let products: Item[] = [
     stock: 44,
     brand: "DADAWU",
     category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/98/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/98/1.jpg",
       "https://i.dummyjson.com/data/products/98/2.jpg",
@@ -2080,7 +2110,9 @@ let products: Item[] = [
     stock: 138,
     brand: "Ifei Home",
     category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/99/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/99/1.jpg",
       "https://i.dummyjson.com/data/products/99/2.jpg",
@@ -2099,7 +2131,9 @@ let products: Item[] = [
     stock: 133,
     brand: "YIOSI",
     category: "lighting",
-    thumbnail: "https://i.dummyjson.com/data/products/100/thumbnail.jpg",
+    get thumbnail() {
+      return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
+    },
     images: [
       "https://i.dummyjson.com/data/products/100/1.jpg",
       "https://i.dummyjson.com/data/products/100/2.jpg",
@@ -2141,7 +2175,7 @@ export const getProducts = async ({
   page: number;
   limit: number;
   filter?: string[] | undefined | null;
-  sort: string;
+  sort: string | null;
 }) => {
   console.log("(app/lib/sampleData.tsx) getProducts() triggered");
   console.log(
@@ -2164,187 +2198,9 @@ export const getProducts = async ({
     "(app/lib/sampleData.tsx) sort passed into getProducts() is:",
     sort
   );
-  // -------- ths is the original code before chat gpt suggestion below. this doesnt filter.
-  //   try {
-  //     // console.log("result", result);
 
-  //     // if (searchQuery) {
-  //     //   result = result.filter((product) =>
-  //     //     Object.values(product).some((val) =>
-  //     //       String(val).toLowerCase().includes(searchQuery.toLowerCase())
-  //     //     )
-  //     //   );
-  //     // }
+  // ChatGPT suggestion
 
-  //     if (searchQuery === "undefined") {
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) searchQuery === 'undefined', limit is:",
-  //         limit
-  //       );
-  //       const skip = (page - 1) * limit;
-  //       let result = products.slice(skip, skip + limit);
-  //       return result;
-  //     } else {
-  //       const searchedProducts = products.filter((product) =>
-  //         Object.values(product).some((val) =>
-  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
-  //         )
-  //       );
-  //       const skip = (page - 1) * limit;
-  //       let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
-  //       //   return result;
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) searchQuery is defined. searchedProducts array length:",
-  //         searchedProducts.length,
-  //         "sliced to return:",
-  //         slicedSearchedProducts.length
-  //       );
-  //       // return {
-  //       //   xproducts: Array.isArray(searchedProducts) ? searchedProducts : [],
-  //       // };
-  //       return slicedSearchedProducts;
-  //     }
-  //   } catch (error) {
-  //     return { error };
-  //   }
-  // };
-
-  ////Chatgpt suggestion below. works but with some bugs (does not render items without filter being appied..)
-
-  //   try {
-  //     let filteredProducts = [...products]; // Copy the products array
-
-  //     // Filter based on searchQuery if it's defined
-  //     if (searchQuery && searchQuery !== "undefined") {
-  //       filteredProducts = filteredProducts.filter((product) =>
-  //         Object.values(product).some((val) =>
-  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
-  //         )
-  //       );
-  //     }
-
-  //     // Filter based on filter strings
-  //     if (filter.length > 0) {
-  //       filteredProducts = filteredProducts.filter((product) =>
-  //         filter.some((val) =>
-  //           String(product.category).toLowerCase().includes(val.toLowerCase())
-  //         )
-  //       );
-  //     }
-
-  //     const skip = (page - 1) * limit;
-  //     const slicedProducts = filteredProducts.slice(skip, skip + limit);
-  //     console.log(
-  //       "(app/lib/sampleData.tsx) sliced products are:",
-  //       slicedProducts.length
-  //     );
-
-  //     return slicedProducts;
-  //   } catch (error) {
-  //     return { error };
-  //   }
-  // };
-
-  //-------------------------------------------------------------------------------
-  //This is me trying to manually edit the function to include filters -----
-  //   let sortedProducts;
-  //   if (sort === "price-asc") {
-  //     sortedProducts = products.slice().sort((a, b) => a.price - b.price);
-  //     // console.log(
-  //     //   "products low to high",
-  //     //   products.slice().sort((a, b) => a.price - b.price)
-  //     // );
-  //   } else if (sort === "price-desc") {
-  //     sortedProducts = products.slice().sort((a, b) => b.price - a.price);
-  //     // console.log(
-  //     //   "producsts high to low",
-  //     //   products.slice().sort((b, a) => b.price - a.price)
-  //     // );
-  //   } else if (sort === ("relevance" || "undefined")) {
-  //     sortedProducts = products;
-  //   }
-  //   try {
-  //     if (searchQuery === "undefined" && filter.includes("undefined")) {
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) searchQuery === 'undefined', filter includes 'undefined'. limit is:",
-  //         limit
-  //       );
-  //       // console.log("(sampleData.tsx/getProducts()), filter:", typeof filter);
-  //       // console.log(filter.includes("undefined"));
-  //       // console.log("filter length:", filter.length, filter);
-  //       const skip = (page - 1) * limit;
-  //       let result = sortedProducts!.slice(skip, skip + limit);
-  //       console.log("result", result);
-  //       return result;
-  //     } else if (searchQuery !== "undefined" && filter.includes("undefined")) {
-  //       const searchedProducts = products.filter((product) =>
-  //         Object.values(product).some((val) =>
-  //           String(val).toLowerCase().includes(searchQuery.toLowerCase())
-  //         )
-  //       );
-  //       const skip = (page - 1) * limit;
-  //       let slicedSearchedProducts = searchedProducts.slice(skip, skip + limit);
-
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) searchQuery is defined. searchedProducts array length:",
-  //         searchedProducts.length,
-  //         "sliced to return:",
-  //         slicedSearchedProducts.length
-  //       );
-
-  //       if (slicedSearchedProducts.length === 0) {
-  //         console.log("no products found from search");
-  //       }
-  //       return slicedSearchedProducts;
-  //     } else if (searchQuery === "undefined" && !filter.includes("undefined")) {
-  //       let filteredProducts = [...products];
-
-  //       filteredProducts = filteredProducts.filter((product) =>
-  //         filter.some((val) =>
-  //           String(product.category).toLowerCase().includes(val.toLowerCase())
-  //         )
-  //       );
-  //       const skip = (page - 1) * limit;
-  //       let slicedFilteredProducts = filteredProducts.slice(skip, skip + limit);
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) filter is defined. filteredProducts array length:",
-  //         filteredProducts.length,
-  //         "sliced to return:",
-  //         slicedFilteredProducts.length
-  //       );
-  //       if (slicedFilteredProducts.length === 0) {
-  //         console.log("no products found from filter");
-  //       }
-  //       return slicedFilteredProducts;
-  //     } else if (searchQuery !== "undefined" && !filter.includes("undefined")) {
-  //       const filteredProducts = products.filter((product) => {
-  //         const searchMatch = Object.values(product).some((value) => {
-  //           if (typeof value === "string") {
-  //             return value.toLowerCase().includes(searchQuery.toLowerCase());
-  //           }
-  //           return false;
-  //         });
-  //         const categoryMatch = filter.some((filterValue) =>
-  //           product.category.toLowerCase().includes(filterValue.toLowerCase())
-  //         );
-  //         return searchMatch && categoryMatch;
-  //       });
-  //       console.log(
-  //         "(sampleData.tsx/getProducts()) searchQuery is defined & filter is defined."
-  //       );
-  //       if (filteredProducts.length === 0) {
-  //         console.log("no products found from search & filter");
-  //       }
-  //       const skip = (page - 1) * limit;
-  //       let slicedFilteredProducts = filteredProducts.slice(skip, skip + limit);
-  //       return slicedFilteredProducts;
-  //     }
-  //   } catch (error) {
-  //     return { error };
-  //   }
-  // };
-
-  //another ChatGPT suggestion
   // Filter products based on the searchQuery
   let filteredProducts = products;
   if (searchQuery) {
@@ -2357,8 +2213,8 @@ export const getProducts = async ({
 
   // // Apply filters
   if (filter) {
-    filteredProducts = filteredProducts.filter(
-      (product) => filter.includes(product.category) // Assuming 'category' is a property in your product
+    filteredProducts = filteredProducts.filter((product) =>
+      filter.includes(product.category)
     );
   }
 
@@ -2374,8 +2230,11 @@ export const getProducts = async ({
   const skip = (page - 1) * limit;
   const slicedProducts = filteredProducts.slice(skip, skip + limit);
 
-  console.log("total items", totalItems);
-  console.log("sliced products length:", slicedProducts.length);
+  console.log("(app/lib/sampleData.tsx) total filtered items", totalItems);
+  console.log(
+    "(app/lib/sampleData.tsx) sliced products length:",
+    slicedProducts.length
+  );
   return {
     products: slicedProducts,
     totalItems,

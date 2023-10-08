@@ -40,7 +40,7 @@ export default function SortMenu({ sortOption }: Props) {
     url.search = searchParams.toString();
     const newUrl = url.toString();
 
-    router.push(newUrl);
+    router.push(newUrl, { scroll: false });
   }, [selectedSortOption, router]);
 
   return (

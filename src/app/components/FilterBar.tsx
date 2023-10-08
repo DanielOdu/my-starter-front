@@ -5,23 +5,12 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   items: any[];
-  // onCategoryBtnClick: any;
-  // selectedCategories: any;
   categories: string[];
   search: string | undefined;
   page: number;
-  // filter: string[];
 };
 
-export default function FilterBar({
-  items,
-  // onCategoryBtnClick,
-  // selectedCategories,
-  categories,
-  search,
-  page,
-}: // filter,
-Props) {
+export default function FilterBar({ items, categories, search, page }: Props) {
   const router = useRouter();
   const initialRender = useRef(true);
   const [selectedCategories, setSelectedCatagories] = useState<any[]>([]);
@@ -71,24 +60,18 @@ Props) {
 
     if (selectedCategories.length === 0) {
       searchParams.delete("filter");
-      // router.push(`/home`);
     } else {
       const filters = selectedCategories.join("&filter=");
       searchParams.set("filter", filters);
-      // router.push(`/home?filter=${filters}`);
     }
     url.search = searchParams.toString();
     const newUrl = url.toString();
 
-    router.push(newUrl);
+    router.push(newUrl, { scroll: false });
   }, [selectedCategories, router]);
 
   return (
     <div className=" bg-orange-400 text-white flex space-x-3 pb-2 max-w-full flex-wrap">
-      {/* {productItems &&
-        productItems.map((productItem, idx) => {
-          return <p>{productItem.category}</p>;
-        })} */}
       {categories &&
         categories.map((category, idx) => {
           return (

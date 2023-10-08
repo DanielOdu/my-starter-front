@@ -26,7 +26,7 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
   }
 
   return (
-    <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[200px]">
+    <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px]">
       <div className=" group/bolt w-full h-full relative bg-purple-500 ">
         <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-blue-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20  pointer-events-none py-1 px-2 rounded-2xl">
           <div className=" pointer-events-auto cursor-pointer peer">

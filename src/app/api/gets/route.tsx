@@ -1,47 +1,47 @@
 //Standard API GET route
 
 import { getProducts, getUniqueCategories } from "@/app/lib/sampleData";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   try {
-    // const url = new URL(request.url);
     let searchQuery = request.nextUrl.searchParams.get("searchQuery");
     if (searchQuery === "undefined") {
       searchQuery = null;
     }
     console.log(
-      "(app/api/gets) searchQuery passed from client into endpint is:",
+      "(app/api/gets) searchQuery passed from client into endpoint is:",
       searchQuery
     );
-    const page = parseInt(request.nextUrl.searchParams.get("page"));
+    const page = parseInt(request.nextUrl.searchParams.get("page") as string); // Use a type assertion here
     console.log(
-      "(app/api/gets) page passed from client into endpint is:",
+      "(app/api/gets) page passed from client into endpoint is:",
       page
     );
-    const limit = parseInt(request.nextUrl.searchParams.get("limit"));
+    const limit = parseInt(request.nextUrl.searchParams.get("limit") as string); // Use a type assertion here
     console.log(
-      "(app/api/gets) limit passed from client into endpint is:",
+      "(app/api/gets) limit passed from client into endpoint is:",
       limit
     );
 
-    let filter = request.nextUrl.searchParams.getAll("filter");
+    let filter = request.nextUrl.searchParams.getAll("filter") as string[];
     if (filter.includes("undefined")) {
-      filter = null;
+      filter = null as any; // Use a type assertion here
     } else {
       filter = Array.from(filter);
     }
+
     console.log(
-      "(app/api/gets) filter passed from client into endpint is:",
+      "(app/api/gets) filter passed from client into endpoint is:",
       filter
     );
     const sort = request.nextUrl.searchParams.get("sort");
     console.log(
-      "(app/api/gets) sort passed from client into endpint is:",
+      "(app/api/gets) sort passed from client into endpoint is:",
       sort
     );
 
-    const products = await getProducts({
+    const productData = await getProducts({
       searchQuery,
       page,
       limit,
@@ -54,9 +54,9 @@ export async function GET(request) {
     //   "(app/api/gets) categories data returned from uniqueCategories() in sampleData lib is:",
     //   categories
     // );
-    // console.log(products, categories);
+
     return NextResponse.json(
-      { message: "OK", products, categories },
+      { message: "OK", productData, categories },
       { status: 200 }
     );
   } catch (err) {

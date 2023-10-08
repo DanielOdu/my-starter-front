@@ -114,7 +114,7 @@ export default function InfiniteScrollItemGrid({
         {/* something in the below classname is causing the far right column to get smaller as the page is made smaller */}
         <div
           ref={ref}
-          className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4 bg-red-300 mb-8"
+          className="col-span-1 mt-16 flex  justify-center sm:col-span-2 md:col-span-3 lg:col-span-4 bg-red-300 mb-8"
         >
           <svg
             aria-hidden="true"
