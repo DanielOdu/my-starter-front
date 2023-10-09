@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchContext } from "../context/search-context";
+import { useSearchContext } from "../context/context";
 
 // type Props = {
 //   items: any[];
@@ -15,9 +15,10 @@ export default function ResetBtn() {
   const router = useRouter();
   //   const url = new URL(window.location.href);
   //   const searchParams = new URLSearchParams(url.search);
-  const { resetText } = useSearchContext();
+  const { resetText, resetFilters } = useSearchContext();
   const handleResetBtnClick = () => {
     resetText();
+    resetFilters();
 
     // console.log("search params in rest", searchParams);
     // searchParams.delete("search");

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useSearchContext } from "../context/context";
 
 type Props = {
   items: any[];
@@ -10,19 +11,26 @@ type Props = {
   page: number;
 };
 
+type filterContextType = {
+  selectedCategories: string[];
+  setSelectedCategories: (selectedCategories: string[]) => void;
+};
+
 export default function FilterBar({ items, categories, search, page }: Props) {
   const router = useRouter();
   const initialRender = useRef(true);
-  const [selectedCategories, setSelectedCatagories] = useState<any[]>([]);
+  const { selectedCategories, setSelectedCategories } =
+    useSearchContext() as unknown as filterContextType;
+  // const [selectedCategories, setSelectedCatagories] = useState<any[]>([]);
 
   const handleCategoryBtnClick = (selectedCategory: string) => {
     if (selectedCategories.includes(selectedCategory)) {
       let categories = selectedCategories.filter(
         (el) => el != selectedCategory
       );
-      setSelectedCatagories(categories);
+      setSelectedCategories(categories);
     } else {
-      setSelectedCatagories([...selectedCategories, selectedCategory]);
+      setSelectedCategories([...selectedCategories, selectedCategory]);
     }
     console.log("(ItemGrid.tsx)", { selectedCategory });
     console.log("(ItemGrid.tsx)", { selectedCategories });
@@ -74,6 +82,9 @@ export default function FilterBar({ items, categories, search, page }: Props) {
     <div className=" bg-orange-400 text-white flex space-x-3 pb-2 max-w-full flex-wrap">
       {categories &&
         categories.map((category, idx) => {
+          // if (categories.includes(category)){
+          console.log("selected categories:", selectedCategories);
+          // }
           return (
             //* When passing a function that takes parameters as a prop, use this notation <<
             <div key={`categories-${idx}`}>

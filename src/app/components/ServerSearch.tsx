@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { useSearchContext } from "../context/search-context";
+import { useSearchContext } from "../context/context";
 
 type SearchContextType = {
   text: string;

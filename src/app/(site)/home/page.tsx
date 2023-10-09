@@ -8,7 +8,7 @@ import InfiniteScrollItemGrid from "@/app/components/InfiniteScrollItemGrid";
 import FilterBar from "@/app/components/FilterBar";
 import SortMenu from "@/app/components/SortMenu";
 import ResetBtn from "@/app/components/ResetBtn";
-import { SearchProvider } from "@/app/context/search-context";
+import { ContextProvider } from "@/app/context/context";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 export async function getData({
@@ -87,6 +87,19 @@ export default async function HomePage({
     typeof searchParams.search === "string" ? searchParams.search : undefined;
   const filter =
     typeof searchParams.filter === "string" ? searchParams.filter : undefined;
+
+  const filterParams = new URLSearchParams("filter=" + filter);
+
+  let initialFilters = undefined;
+  //if filter is not undefined assign the array of values to initialFilters.
+  if (filter != undefined) {
+    initialFilters = Array.from(filterParams.values());
+  }
+
+  console.log("initialFilters params:", filterParams);
+  console.log("initialFilters:", initialFilters);
+
+  // console.log("filterparams !has undefined");
   const sort =
     typeof searchParams.sort === "string" ? searchParams.sort : undefined;
   console.log(
@@ -126,7 +139,7 @@ export default async function HomePage({
     "(home/page.tsx) HomePage() ---------------------- end of data flow ------------------------"
   );
   return (
-    <SearchProvider initialValue={search}>
+    <ContextProvider initialValue={search} initialFilters={initialFilters}>
       <main>
         <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
         <h3 className=" font-black uppercase">
@@ -189,6 +202,6 @@ export default async function HomePage({
           priority
         />
       </main>
-    </SearchProvider>
+    </ContextProvider>
   );
 }
