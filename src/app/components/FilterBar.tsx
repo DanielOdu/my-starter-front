@@ -78,12 +78,15 @@ export default function FilterBar({ items, categories, search, page }: Props) {
     router.push(newUrl, { scroll: false });
   }, [selectedCategories, router]);
 
+  //sort the categories list alphabetically here and then use the sorted version. this stops the list being modified when the sortOptions are changed by the user.
+  const sortedCategories = categories.sort();
+
   return (
     <div className=" bg-orange-400 text-white flex space-x-3 pb-2 max-w-full flex-wrap">
-      {categories &&
-        categories.map((category, idx) => {
+      {sortedCategories &&
+        sortedCategories.map((category, idx) => {
           // if (categories.includes(category)){
-          console.log("selected categories:", selectedCategories);
+          // console.log("selected categories:", selectedCategories);
           // }
           return (
             //* When passing a function that takes parameters as a prop, use this notation <<

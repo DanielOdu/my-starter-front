@@ -1,5 +1,10 @@
 import React from "react";
 
 export default function loading() {
-  return <div className=" bg-pink-500 text-lg">loading...</div>;
+  return (
+    <div className=" bg-lime-500 text-lg text-center mt-12">
+      <h1>loading...</h1>
+      <p> .... .... ...</p>
+    </div>
+  );
 }

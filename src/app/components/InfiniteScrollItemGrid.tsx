@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Card from "../(site)/home/card";
 import { getData } from "../(site)/home/page";
+import loading from "../(site)/_loading";
+import Loading from "../(site)/_loading";
 // import { useRouter } from "next/navigation";
 
 type Props = {
@@ -72,7 +74,7 @@ export default function InfiniteScrollItemGrid({
   // }, [items]);
 
   return (
-    <div className=" flex-col w-full">
+    <div className=" flex-col w-full relative">
       <div> {totalItems} found</div>
       <div
         className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-2 py-2
@@ -109,6 +111,7 @@ export default function InfiniteScrollItemGrid({
           //     </p>
           //   </li>
         ))}
+        {/* </Suspense> */}
 
         {/* loading spinner */}
         {/* something in the below classname is causing the far right column to get smaller as the page is made smaller */}

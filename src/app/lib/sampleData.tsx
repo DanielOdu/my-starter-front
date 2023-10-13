@@ -1,5 +1,5 @@
 type Item = {
-  id: number | string;
+  id: number;
   title: string;
   description: string;
   price: number;
@@ -2223,6 +2223,8 @@ export const getProducts = async ({
     filteredProducts.sort((a, b) => a.price - b.price);
   } else if (sort === "price-desc") {
     filteredProducts.sort((a, b) => b.price - a.price);
+  } else if (sort === "relevance") {
+    filteredProducts.sort((a, b) => a.id - b.id);
   } // Add more sorting conditions if needed
 
   // Calculate pagination

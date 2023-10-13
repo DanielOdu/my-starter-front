@@ -9,6 +9,9 @@ import FilterBar from "@/app/components/FilterBar";
 import SortMenu from "@/app/components/SortMenu";
 import ResetBtn from "@/app/components/ResetBtn";
 import { ContextProvider } from "@/app/context/context";
+import BackToTopBtn from "@/app/components/BackToTopBtn";
+import { Suspense } from "react";
+import Loading from "../_loading";
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 export async function getData({
@@ -24,6 +27,8 @@ export async function getData({
   filter?: string;
   sort?: string;
 }) {
+  // simulate delay
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   //save the returned value from the imported function to the 'domain' variable
   const domain = getDomain();
   const searchQuery = query;
@@ -138,9 +143,10 @@ export default async function HomePage({
   console.log(
     "(home/page.tsx) HomePage() ---------------------- end of data flow ------------------------"
   );
+
   return (
     <ContextProvider initialValue={search} initialFilters={initialFilters}>
-      <main>
+      <main className=" relative">
         <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
         <h3 className=" font-black uppercase">
           "Gets" dummy data from the endpoint api/gets
@@ -156,19 +162,23 @@ export default async function HomePage({
                <p>{item.description}</p>
              </li> */}
 
-        {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
-        <ServerSearch search={search} />
+        <div className=" bg-pink-400 top-[42px] sticky z-20">
+          {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+          <ServerSearch search={search} />
 
-        <FilterBar
-          items={items}
-          categories={categories}
-          search={search}
-          page={page}
-        />
+          <FilterBar
+            items={items}
+            categories={categories}
+            search={search}
+            page={page}
+          />
 
-        <ResetBtn />
+          <ResetBtn />
 
-        <SortMenu sortOption={sort} />
+          <SortMenu sortOption={sort} />
+        </div>
+
+        <BackToTopBtn />
 
         {/* pagination grid ------------ */}
         {/* <div className=" flex h-auto overflow-auto  ">
@@ -182,14 +192,16 @@ export default async function HomePage({
       </div> */}
 
         {/* Infinite scroll grid ---------- */}
-        <div key={Math.random()} className=" flex h-auto overflow-auto  ">
-          <InfiniteScrollItemGrid
-            search={search}
-            initialItems={items}
-            filter={filter}
-            totalItems={totalItems}
-          />
-        </div>
+        <Suspense fallback={<GridLoading />}>
+          <div key={Math.random()} className=" flex h-auto overflow-auto  ">
+            <InfiniteScrollItemGrid
+              search={search}
+              initialItems={items}
+              filter={filter}
+              totalItems={totalItems}
+            />
+          </div>
+        </Suspense>
 
         {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
 
@@ -204,4 +216,8 @@ export default async function HomePage({
       </main>
     </ContextProvider>
   );
+}
+
+function GridLoading() {
+  return <div className=" bg-yellow-400 h-12">GRID LOADING</div>;
 }

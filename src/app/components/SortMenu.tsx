@@ -10,7 +10,7 @@ type Props = {
 export default function SortMenu({ sortOption }: Props) {
   const router = useRouter();
   const initialRender = useRef(true);
-  const [selectedSortOption, setSelectedSortOption] = useState("relevance");
+  const [selectedSortOption, setSelectedSortOption] = useState(sortOption);
 
   const handleSortChange = (event: { target: { value: any } }) => {
     const value = event.target.value;
@@ -34,7 +34,7 @@ export default function SortMenu({ sortOption }: Props) {
       searchParams.delete("sort");
       // router.push(`/home`);
     } else {
-      searchParams.set("sort", selectedSortOption);
+      searchParams.set("sort", selectedSortOption as string);
       // router.push(`/home?search=${query}`);
     }
     url.search = searchParams.toString();
@@ -44,7 +44,7 @@ export default function SortMenu({ sortOption }: Props) {
   }, [selectedSortOption, router]);
 
   return (
-    <select value={sortOption} onChange={handleSortChange}>
+    <select value={selectedSortOption} onChange={handleSortChange}>
       <option value="relevance">Relevance</option>
       <option value="price-asc">Price: Low to High</option>
       <option value="price-desc">Price: High to Low</option>

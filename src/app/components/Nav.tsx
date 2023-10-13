@@ -9,11 +9,11 @@ export default function Nav() {
       <div className=" max-w-[1485px] px-4  w-full flex justify-between items-center">
         <div className="space-x-3 font-black uppercase text-white ">
           <Link className="hover:text-blue-400 transition-colors" href="./">
-            NAV
+            Landing
           </Link>
           {/* If already on a dynamic page and click 'home' link in nav it takes you to home/home FIX THIS! */}
           <Link className="hover:text-blue-400 transition-colors" href="./home">
-            Home
+            Product Grid
           </Link>
           <Link
             className="hover:text-blue-400 transition-colors"
@@ -22,13 +22,13 @@ export default function Nav() {
             Carousel
           </Link>
           <Link className="hover:text-blue-400 transition-colors" href="./faq">
-            FAQ
+            Accordion
           </Link>
           <Link
             className="hover:text-blue-400 transition-colors"
             href="./contact"
           >
-            Contact
+            Contact form
           </Link>
           <Link
             className="hover:text-blue-400 transition-colors"
