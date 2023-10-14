@@ -12,7 +12,7 @@ export default function BackToTopBtn() {
     });
   };
 
-  const onScroll = useCallback((event) => {
+  const onScroll = useCallback(() => {
     const { pageYOffset, scrollY } = window;
     // console.log("yOffset", pageYOffset, "scrollY", scrollY);
     setScrollY(window.pageYOffset);
@@ -23,7 +23,7 @@ export default function BackToTopBtn() {
     window.addEventListener("scroll", onScroll, { passive: true });
     // remove event on unmount to prevent a memory leak with the cleanup
     return () => {
-      window.removeEventListener("scroll", onScroll, { passive: true });
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 

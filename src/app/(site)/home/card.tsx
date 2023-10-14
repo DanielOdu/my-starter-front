@@ -5,6 +5,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FaBolt } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 type Props = {
   prop1: string | number;
@@ -21,13 +22,50 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
   //   event.preventDefault();
   //   setCount(count + 1);
   // };
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Function to simulate loading data
+  // function loadData() {
+  //   setTimeout(() => {
+  //     setIsLoaded(true);
+  //   }, 1000);
+  // }
+
+  // Call loadData when component mounts
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
+
+  function handleImageLoad() {
+    // setTimeout(() => {
+    setIsLoaded(true);
+    // }, 1000);
+  }
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, [prop3]);
+
   if (!prop1) {
     return <div>Empty</div>;
   }
 
+  if (!isLoaded) {
+    return (
+      <div className=" bg-gray-800 justify-self-center w-full h-[400px] max-w-[400px] min-w-[300px] rounded-2xl animate-pulse"></div>
+    );
+  }
+
   return (
-    <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px]">
-      <div className=" group/bolt w-full h-full relative bg-purple-500 ">
+    // <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px]">
+
+    <div
+      className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px] ${
+        isLoaded ? "opacity-100" : "opacity-0"
+      }`}
+      onLoad={handleImageLoad}
+    >
+      <div className=" group/bolt w-full h-full relative  ">
         <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-blue-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20  pointer-events-none py-1 px-2 rounded-2xl">
           <div className=" pointer-events-auto cursor-pointer peer">
             <FaBolt />
@@ -44,6 +82,7 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
           height={400}
           // fill
           priority
+          // onLoad={handleImageLoad}
         />
       </div>
       <div className=" grow relative  p-2">

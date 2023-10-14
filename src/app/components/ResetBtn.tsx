@@ -1,32 +1,16 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchContext } from "../context/context";
-
-// type Props = {
-//   items: any[];
-//   categories: string[];
-//   search: string | undefined;
-//   page: number;
-// };
+import { useSearchContext, ContextValueType } from "../context/context";
 
 export default function ResetBtn() {
   const router = useRouter();
-  //   const url = new URL(window.location.href);
-  //   const searchParams = new URLSearchParams(url.search);
-  const { resetText, resetFilters } = useSearchContext();
+
+  const { resetText, resetFilters } =
+    useSearchContext() as unknown as ContextValueType;
   const handleResetBtnClick = () => {
     resetText();
     resetFilters();
-
-    // console.log("search params in rest", searchParams);
-    // searchParams.delete("search");
-    // searchParams.delete("filter");
-    // searchParams.delete("sort");
-    // const url = new URL(window.location.href);
-    // const stringUrl = url.toString();
-    // console.log("url", stringUrl);
     router.push("/home", { scroll: false });
     console.log("RESET");
   };

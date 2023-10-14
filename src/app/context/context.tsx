@@ -9,7 +9,7 @@ interface ContextProviderProps {
   initialFilters?: string[] | null;
 }
 
-interface ContextValueType {
+export interface ContextValueType {
   text: string;
   resetText: () => void;
   setText: (text: string) => void;

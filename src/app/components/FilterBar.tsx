@@ -82,7 +82,7 @@ export default function FilterBar({ items, categories, search, page }: Props) {
   const sortedCategories = categories.sort();
 
   return (
-    <div className=" bg-orange-400 text-white flex space-x-3 pb-2 max-w-full flex-wrap">
+    <div className=" bg-orange-400 text-white flex space-x-2 pb-2 max-w-full flex-wrap text-sm">
       {sortedCategories &&
         sortedCategories.map((category, idx) => {
           // if (categories.includes(category)){
