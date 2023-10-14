@@ -79,11 +79,11 @@ export default function InfiniteScrollItemGrid({
   // }, [items]);
 
   return (
-    <div className=" flex-col w-full relative">
+    <div className=" flex-col w-full relative text-white">
       <div> {totalItems} found</div>
       <div
-        className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-2 py-2
-          bg-blue-300 w-full mb-8 "
+        className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-8 py-2
+          bg-blue-30 w-full mb-8 "
       >
         {items?.map((item, idx) => (
           <Card
@@ -127,7 +127,7 @@ export default function InfiniteScrollItemGrid({
           >
             <svg
               aria-hidden="true"
-              className="h-10 w-10 animate-spin fill-sky-600 text-gray-200 dark:text-gray-600"
+              className="h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

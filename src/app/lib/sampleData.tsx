@@ -2265,45 +2265,47 @@ export function getUniqueCategories() {
   return uniqueCartegoriesArray;
 }
 
-export const addItem = (product: Item) => {
-  console.log("add item function triggered");
-  products.push(product);
-};
+//FOR LIME STARTER
 
-export const deleteProduct = (id: number) => {
-  products = products.filter((product) => product.id !== id);
-};
+// export const addItem = (product: Item) => {
+//   console.log("add item function triggered");
+//   products.push(product);
+// };
 
-export const updateProduct = (
-  id: number,
-  title: string,
-  description: string,
-  price: number,
-  discountPercentage: number,
-  rating: number,
-  stock: number,
-  brand: string,
-  category: string,
-  thumbnail: string,
-  images: [string]
-) => {
-  const product = products.find((product) => product.id === id);
+// export const deleteProduct = (id: number) => {
+//   products = products.filter((product) => product.id !== id);
+// };
 
-  if (product) {
-    product.title = title;
-    product.description = description;
-    product.price = price;
-    product.discountPercentage = discountPercentage;
-    product.rating = rating;
-    product.stock = stock;
-    product.brand = brand;
-    product.category = category;
-    product.thumbnail = thumbnail;
-    product.images = images;
-  } else {
-    throw new Error("No Product Found");
-  }
-};
+// export const updateProduct = (
+//   id: number,
+//   title: string,
+//   description: string,
+//   price: number,
+//   discountPercentage: number,
+//   rating: number,
+//   stock: number,
+//   brand: string,
+//   category: string,
+//   thumbnail: string,
+//   images: [string]
+// ) => {
+//   const product = products.find((product) => product.id === id);
+
+//   if (product) {
+//     product.title = title;
+//     product.description = description;
+//     product.price = price;
+//     product.discountPercentage = discountPercentage;
+//     product.rating = rating;
+//     product.stock = stock;
+//     product.brand = brand;
+//     product.category = category;
+//     product.thumbnail = thumbnail;
+//     product.images = images;
+//   } else {
+//     throw new Error("No Product Found");
+//   }
+// };
 
 export const getbyID = (id: number | string) => {
   return products.find((product) => product.id === id);

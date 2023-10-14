@@ -46,7 +46,7 @@ export default function ServerSearch({ search }: { search?: string }) {
         placeholder="serveSearch"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="border-2 border-green-400 rounded-3xl bg-transparent"
+        className="border-2 border-white rounded-3xl bg-transparent"
       />
     </div>
   );

@@ -145,8 +145,10 @@ export default async function HomePage({
   return (
     <ContextProvider initialValue={search} initialFilters={initialFilters}>
       <main className=" relative" key={Math.random()}>
-        <h1 className=" font-black text-6xl ">THIS IS YOUR HOME PAGE</h1>
-        <h3 className=" font-black uppercase">
+        <h1 className=" font-black text-6xl text-white ">
+          THIS IS YOUR HOME PAGE
+        </h1>
+        <h3 className=" font-black uppercase text-white ">
           "Gets" dummy data from the endpoint api/gets
         </h3>
         <HeroCarousel />

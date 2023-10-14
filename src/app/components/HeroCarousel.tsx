@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronLeftCircle, BiChevronRightCircle } from "react-icons/bi";
 import { RxDotFilled } from "react-icons/rx";
 
@@ -19,13 +19,21 @@ function HeroCarousel() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const slideRotation = () => {
-    setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
-    }, 2000);
-  };
+  // const slideRotation = () => {
+  //   setInterval(() => {
+  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
+  //   }, 2000);
+  // };
 
   // slideRotation();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
