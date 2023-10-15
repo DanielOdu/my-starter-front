@@ -65,8 +65,11 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
       }`}
       onLoad={handleImageLoad}
     >
-      <div className=" group/bolt w-full h-full relative  ">
-        <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-blue-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20  pointer-events-none py-1 px-2 rounded-2xl">
+      <div
+        className=" group/bolt w-full h-full relative  "
+        onClick={() => console.log("quick view clicked")}
+      >
+        <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-gray-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20 hover:text-blue-400  pointer-events-none py-1 px-2 rounded-2xl">
           <div className=" pointer-events-auto cursor-pointer peer">
             <FaBolt />
           </div>

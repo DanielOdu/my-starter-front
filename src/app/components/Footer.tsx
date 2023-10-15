@@ -7,10 +7,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <div className="fixed bottom-0 z-50  w-full bg-black  py-2 border-t-2 border-white flex justify-center">
-      <div className=" w-full max-w-[1485px] grid grid-cols-3 px-4">
-        <div className=" font-black uppercase text-white space-x-3">
+      <div className=" w-full max-w-[1485px] grid grid-cols-3 px-6">
+        <div className=" font-black text-xs flex  uppercase text-white space-x-3 items-center ">
           <Link
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-blue-400 transition-colors "
             href="./third-party-api"
           >
             third-party-api
@@ -25,7 +25,7 @@ export default function Footer() {
         <span className=" justify-self-center text-white">
           © copyright {year}
         </span>
-        <div className="flex w-20 justify-between items-center justify-self-end text-white">
+        <div className="flex w-28 justify-between  items-center justify-self-end text-white">
           <Link href={"#"} className="hover:text-blue-400 transition-colors">
             <FaGlobe />
           </Link>

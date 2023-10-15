@@ -1,45 +1,54 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { BsCircleHalf } from "react-icons/bs";
 
 export default function Nav() {
+  const [isRotated, setIsRotated] = useState(false);
+
+  const handleClick = () => {
+    setIsRotated(!isRotated);
+  };
+
   return (
     <div className="fixed  w-full z-50 bg-black  m-0 flex justify-center py-2 border-b-2  ">
-      <div className=" max-w-[1485px] px-4  w-full flex justify-between items-center">
+      <div className=" max-w-[1485px] px-6  w-full flex justify-between items-center">
         <div className="space-x-3 font-black uppercase text-white ">
           <Link className="hover:text-blue-400 transition-colors" href="./">
             Landing
           </Link>
           {/* If already on a dynamic page and click 'home' link in nav it takes you to home/home FIX THIS! */}
-          <Link className="hover:text-blue-400 transition-colors" href="./home">
+          <Link className="hover:text-blue-400 transition-colors" href="/home">
             Product Grid
           </Link>
           <Link
             className="hover:text-blue-400 transition-colors"
-            href="./carousel"
+            href="/carousel"
           >
             Carousel
           </Link>
-          <Link className="hover:text-blue-400 transition-colors" href="./faq">
+          <Link className="hover:text-blue-400 transition-colors" href="/faq">
             Accordion
           </Link>
           <Link
             className="hover:text-blue-400 transition-colors"
-            href="./contact"
+            href="/contact"
           >
             Contact form
           </Link>
-          <Link
-            className="hover:text-blue-400 transition-colors"
-            href="./about"
-          >
+          <Link className="hover:text-blue-400 transition-colors" href="/about">
             About
           </Link>
         </div>
         <div className=" flex items-center">
           <div className="text-white px-2">LANG</div>
-          <div className=" text-white hover:rotate-180 transition hover:text-blue-400 cursor-pointer">
+          <div
+            className={`text-white transition cursor-pointer ${
+              isRotated ? "rotate-180" : ""
+            }`}
+            onClick={handleClick}
+          >
             <BsCircleHalf />
           </div>
         </div>

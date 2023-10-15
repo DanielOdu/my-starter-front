@@ -10,6 +10,12 @@ import SortMenu from "@/app/components/SortMenu";
 import ResetBtn from "@/app/components/ResetBtn";
 import { ContextProvider } from "@/app/context/context";
 import BackToTopBtn from "@/app/components/BackToTopBtn";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "100",
+});
 
 //This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
 export async function getData({
@@ -146,6 +152,9 @@ export default async function HomePage({
     <ContextProvider initialValue={search} initialFilters={initialFilters}>
       <main className=" relative" key={Math.random()}>
         <h1 className=" font-black text-6xl text-white ">
+          THIS IS YOUR HOME PAGE
+        </h1>
+        <h1 className={` ${roboto.className} font-black text-6xl text-white`}>
           THIS IS YOUR HOME PAGE
         </h1>
         <h3 className=" font-black uppercase text-white ">

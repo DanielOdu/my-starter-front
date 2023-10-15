@@ -31,14 +31,12 @@ function FaqItem({
       <div
         className={`${
           isOpen
-            ? "flex  border-b  py-2 transition-all "
-            : "flex   py-2 border-transparent transition-all"
+            ? "flex  border-b  py-2 transition-all cursor-pointer "
+            : "flex   py-2 border-transparent transition-all cursor-pointer"
         }`}
+        onClick={btnOnClick}
       >
-        <button
-          className="flex justify-between cursor-pointer w-full "
-          onClick={btnOnClick}
-        >
+        <button className="flex justify-between  w-full  ">
           <h3 className=" font-medium px-2">{data.question}</h3>
           <h3
             className={`${

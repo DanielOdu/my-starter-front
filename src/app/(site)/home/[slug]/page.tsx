@@ -31,7 +31,7 @@ export default async function NewDynamicPage({
       const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
       // .then((response) => response.json())
       // .then((json) => console.log(json));
-      console.log("response from endpoint", res);
+      // console.log("response from endpoint", res);
       //Check that the response is OK, if not, throw an error
       if (!res.ok) {
         throw new Error("Failed to fetch data");
@@ -57,7 +57,7 @@ export default async function NewDynamicPage({
   console.log("Item data:::", ItemData);
 
   return (
-    <main className=" flex">
+    <main className=" flex text-white">
       <div>
         <h1>This is a new dynamic page</h1>
         <h2>Product id from params: {params.slug}</h2>

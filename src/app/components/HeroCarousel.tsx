@@ -30,7 +30,7 @@ function HeroCarousel() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -74,7 +74,13 @@ function HeroCarousel() {
       </div>
       <div className=" text-gray-300/25  flex justify-center items-center absolute bottom-[10px] translate-x-[-50%] left-1/2 space-x-1 cursor-pointer">
         {slides.map((slide, dotBtnIndex) => (
-          <div key={dotBtnIndex} onClick={() => goToSlide(dotBtnIndex)}>
+          <div
+            key={dotBtnIndex}
+            onClick={() => goToSlide(dotBtnIndex)}
+            style={{
+              color: currentIndex === dotBtnIndex ? "blue" : "gray", // Change color based on currentIndex
+            }}
+          >
             <RxDotFilled
               // style={{ fill: "white" }}
               // style={dotBtnIndex === currentIndex ? "border-2" : "border-0"}
