@@ -11,6 +11,8 @@ import ResetBtn from "@/app/components/ResetBtn";
 import { ContextProvider } from "@/app/context/context";
 import BackToTopBtn from "@/app/components/BackToTopBtn";
 import { Roboto } from "next/font/google";
+import { useNavBarHeight } from "@/app/context/dimensionContext";
+import Options from "@/app/components/OptionsBar";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -170,9 +172,16 @@ export default async function HomePage({
               <p>{item.title}</p>
                <p>{item.description}</p>
              </li> */}
+        <Options
+          search={search}
+          sort={sort}
+          items={items}
+          categories={categories}
+          page={page}
+        />
 
-        <div className=" bg-pink-400 top-[42px] sticky z-20">
-          {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+        {/* Items can also be passed to a child component as a prop. Within the child component the items can be saved to another component specific variable and be mapped over. */}
+        {/* <div className={`bg-pink-400 top-[${useNavBarHeight}px] sticky z-20  `}>
           <div className=" flex">
             <ServerSearch search={search} />
             <SortMenu sortOption={sort} />
@@ -185,7 +194,7 @@ export default async function HomePage({
             search={search}
             page={page}
           />
-        </div>
+        </div> */}
 
         <BackToTopBtn />
 

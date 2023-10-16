@@ -16,8 +16,13 @@ export default function ResetBtn() {
   };
 
   return (
-    <div className=" bg-purple-400 text-white flex pb-2 max-w-full flex-wrap">
-      <button onClick={handleResetBtnClick}>reset</button>
+    <div className=" text-white flex pb-2 max-w-full flex-wrap py-2">
+      <button
+        className=" rounded-full border-2 px-2"
+        onClick={handleResetBtnClick}
+      >
+        reset
+      </button>
     </div>
   );
 }

@@ -43,10 +43,10 @@ export default function ServerSearch({ search }: { search?: string }) {
     <div className=" text-white py-2 ">
       <input
         type="text"
-        placeholder="serveSearch"
+        placeholder="Search"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="border-2 border-white rounded-3xl bg-transparent"
+        className="border-2 border-white rounded-3xl bg-transparent placeholder:text-white/30 text-center"
       />
     </div>
   );

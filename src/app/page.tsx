@@ -1,9 +1,16 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaXTwitter, FaInstagram, FaGithub, FaGlobe } from "react-icons/fa6";
 import { BsCircleHalf } from "react-icons/bs";
+import { useState } from "react";
 
 export default function Landing() {
+  const [isRotated, setIsRotated] = useState(false);
+
+  const handleClick = () => {
+    setIsRotated(!isRotated);
+  };
   return (
     <>
       <main className="flex flex-col  border-2 border-gradient-to-br from-white to-gray-400 rounded-3xl overflow-hidden  h-[90%] w-[90%] my-auto    ">
@@ -61,7 +68,12 @@ export default function Landing() {
                 </span> */}
                 </h2>
               </Link>
-              <div className="px-2 hover:rotate-180 transition-transform ">
+              <div
+                className={`px-2 cursor-pointer transition-transform ${
+                  isRotated ? "rotate-180" : ""
+                }`}
+                onClick={handleClick}
+              >
                 {/* <BsCircleHalf
                   size="36"
                   className="hover:text-blue-400 transition-colors bg-gradient-to-br from-white to-pink-400 "

@@ -79,8 +79,8 @@ export default function InfiniteScrollItemGrid({
   // }, [items]);
 
   return (
-    <div className=" flex-col w-full relative text-white">
-      <div> {totalItems} found</div>
+    <div className=" flex-col w-full relative text-white  py-2 ">
+      <div className="text-center"> {totalItems} found</div>
       <div
         className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-8 py-2
           bg-blue-30 w-full mb-8 "
