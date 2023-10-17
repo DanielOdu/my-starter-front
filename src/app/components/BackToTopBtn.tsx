@@ -29,7 +29,7 @@ export default function BackToTopBtn() {
 
   return (
     <button
-      className={` text-white bg-blue-200/20 rounded-full py-2 text-xs px-2 fixed z-20 left-3/4 hover:bg-gray-700 transition-all  ${
+      className={` text-white bg-blue-200/20 rounded-full py-2 text-xs px-2 fixed z-20 left-2/4 bottom-[15%] hover:bg-gray-700 transition-all -translate-x-1/2  ${
         scrollY > 1600 ? "visible" : "invisible"
       }`}
       onClick={scrollToTop}

@@ -52,7 +52,7 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
 
   if (!isLoaded) {
     return (
-      <div className=" bg-gray-800 justify-self-center w-full h-[400px] max-w-[400px] min-w-[300px] rounded-2xl animate-pulse"></div>
+      <div className=" bg-gray-800 justify-self-center w-full h-[400px] max-w-[400px] min-w-[150px] sm:min-w-[300px] rounded-2xl animate-pulse"></div>
     );
   }
 
@@ -60,7 +60,7 @@ export default function Card({ prop1, prop2, prop3, prop4 }: Props) {
     // <div className="  h-fit   justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px]">
 
     <div
-      className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[300px] ${
+      className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[150px] sm:min-w-[300px] ${
         isLoaded ? "opacity-100" : "opacity-0"
       }`}
       onLoad={handleImageLoad}

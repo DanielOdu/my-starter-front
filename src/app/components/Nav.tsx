@@ -3,16 +3,18 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsCircleHalf } from "react-icons/bs";
+import { CgMenu } from "react-icons/cg";
 import {
   useNavBarHeight,
   useUpdateNavBarHeight,
+  useUpdateMobileNavBarHeight,
 } from "../context/dimensionContext";
 
 export default function Nav() {
   const [isRotated, setIsRotated] = useState(false);
   // const [navBarHeight, setNavBarHeight] = useState(0);
   const navBarRef = useRef(null);
-  const navBarHeight = useNavBarHeight(); // Use the context to get the navBarHeight
+  // const navBarHeight = useNavBarHeight(); // Use the context to get the navBarHeight
   const updateNavBarHeight = useUpdateNavBarHeight();
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function Nav() {
 
   return (
     <div
-      className="fixed  w-full z-50 bg-black  m-0 flex justify-center py-2 border-b-2  "
+      className="fixed  w-full z-50 bg-black  m-0  justify-center py-2 border-b-2 hidden sm:flex  "
       ref={navBarRef}
     >
       <div className=" max-w-[1485px] px-6  w-full flex justify-between items-center">
@@ -71,6 +73,18 @@ export default function Nav() {
           <Link className="hover:text-blue-400 transition-colors" href="/about">
             About
           </Link>
+          <Link
+            className="hover:text-blue-400 transition-colors "
+            href="./third-party-api"
+          >
+            third-party-api
+          </Link>
+          <Link
+            className="hover:text-blue-400 transition-colors"
+            href="./multiple-third-party-api"
+          >
+            multiple-third-party-api
+          </Link>
         </div>
         <div className=" flex items-center">
           <div className="text-white px-2">LANG</div>
@@ -83,6 +97,55 @@ export default function Nav() {
             <BsCircleHalf />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+export function MobileNav() {
+  const [isRotated, setIsRotated] = useState(false);
+  const mobileNavBarRef = useRef(null);
+  const updateNavBarHeight = useUpdateMobileNavBarHeight();
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (mobileNavBarRef.current) {
+        const newHeight = mobileNavBarRef.current.offsetHeight;
+        console.log("Navbar Height:", newHeight); // Log the height as it changes
+        updateNavBarHeight(newHeight); // Update the context value
+      }
+    };
+
+    updateHeight(); // Initial call to get the height
+
+    // Add a resize event listener to update the height on window resize
+    window.addEventListener("resize", updateHeight);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [mobileNavBarRef, updateNavBarHeight]);
+
+  const handleClick = () => {
+    setIsRotated(!isRotated);
+  };
+  return (
+    <div
+      className="text-white bg-black w-full z-50 fixed  top-0 flex py-2 border-b-2  sm:hidden px-6 items-center"
+      ref={mobileNavBarRef}
+    >
+      {" "}
+      <div className=" w-full ">
+        <CgMenu />
+      </div>
+      <div
+        className={`text-white transition cursor-pointer ${
+          isRotated ? "rotate-180" : ""
+        }`}
+        onClick={handleClick}
+      >
+        <BsCircleHalf />
       </div>
     </div>
   );

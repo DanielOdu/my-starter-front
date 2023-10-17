@@ -25,7 +25,7 @@ export default function InfiniteScrollItemGrid({
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
     delay: 1000,
-    threshold: 1,
+    threshold: 0.5,
   });
   // const router = useRouter();
 
@@ -82,7 +82,7 @@ export default function InfiniteScrollItemGrid({
     <div className=" flex-col w-full relative text-white  py-2 ">
       <div className="text-center"> {totalItems} found</div>
       <div
-        className=" grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-8 py-2
+        className=" grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 sm:gap-8 py-2
           bg-blue-30 w-full mb-8 "
       >
         {items?.map((item, idx) => (
@@ -123,7 +123,7 @@ export default function InfiniteScrollItemGrid({
         {items?.length < totalItems && (
           <div
             ref={ref}
-            className="col-span-1 mt-16 flex  justify-center sm:col-span-2 md:col-span-3 lg:col-span-4  mb-8"
+            className=" col-span-full mt-16 flex justify-center mb-8"
           >
             <svg
               aria-hidden="true"

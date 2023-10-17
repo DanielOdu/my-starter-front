@@ -221,14 +221,14 @@ export default async function HomePage({
 
         {/* <div className=" bg-gray-600"> <AddItemForm /></div> */}
 
-        <Image
+        {/* <Image
           src="/vercel.svg"
           alt="Vercel Logo"
           className="dark:invert"
           width={100}
           height={24}
           priority
-        />
+        /> */}
       </main>
     </ContextProvider>
   );
