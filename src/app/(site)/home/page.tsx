@@ -152,7 +152,7 @@ export default async function HomePage({
 
   return (
     <ContextProvider initialValue={search} initialFilters={initialFilters}>
-      <main className=" relative" key={Math.random()}>
+      <main className=" relative " key={Math.random()}>
         <h1 className=" font-black text-6xl text-white ">
           THIS IS YOUR HOME PAGE
         </h1>

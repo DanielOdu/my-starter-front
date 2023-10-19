@@ -9,7 +9,7 @@ const SiteLayout = ({ children }: { children: React.ReactNode }) => {
         <Nav />
         <MobileNav />
         <div className=" flex-col w-full">
-          <main className=" max-w-[1485px] w-full px-6 pt-12  ">
+          <main className=" max-w-[1485px] w-full px-6 pt-12   ">
             {children}
           </main>
           <MobileSocialFooter />

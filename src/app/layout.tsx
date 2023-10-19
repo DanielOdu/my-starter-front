@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className}  h-screen bg-black flex justify-center select-none relative  `}
+        className={`${inter.className}  h-screen bg-black flex justify-center select-none relative  grow  `}
       >
         {/* <div className=" border-2 border-green-600 rounded-3xl max-w-[90%] max-h-[90%] w-full h-full overflow-auto ">
           {" "} */}
