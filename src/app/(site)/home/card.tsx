@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FaBolt } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { Item } from "@/app/types/types";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
   // prop1: string | number;
@@ -76,51 +77,57 @@ export default function Card({
       {/* <Modal2 onClose={onClose}>
         <p> test modal</p>
       </Modal2> */}
-      <div
-        className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[150px] sm:min-w-[300px] ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-        onLoad={handleImageLoad}
-      >
-        <div className=" group/bolt w-full h-full relative  ">
-          <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-gray-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20 hover:text-blue-400  pointer-events-none py-1 px-2 rounded-2xl">
-            <div
-              className=" pointer-events-auto cursor-pointer peer"
-              onClick={() => openModal(item)}
-            >
-              <FaBolt />
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.1 }}
+          className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[150px] sm:min-w-[300px] ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={handleImageLoad}
+        >
+          <div className=" group/bolt w-full h-full relative  ">
+            <div className=" flex absolute opacity-0 group-hover/bolt:opacity-100 text-gray-400 top-3 left-3 transition-all  items-center space-x-1 hover:bg-gray-600/20 hover:text-blue-400  pointer-events-none py-1 px-2 rounded-2xl">
+              <div
+                className=" pointer-events-auto cursor-pointer peer"
+                onClick={() => openModal(item)}
+              >
+                <FaBolt />
+              </div>
+              <span className=" opacity-0 peer-hover:opacity-100 transition-opacity select-none pointer-events-none">
+                QUICK VIEW
+              </span>
             </div>
-            <span className=" opacity-0 peer-hover:opacity-100 transition-opacity select-none pointer-events-none">
-              QUICK VIEW
-            </span>
+            <Image
+              src={prop3}
+              alt="item.thumbnail"
+              // className="dark:invert"
+              width={400}
+              height={400}
+              // fill
+              priority
+              // onLoad={handleImageLoad}
+            />
           </div>
-          <Image
-            src={prop3}
-            alt="item.thumbnail"
-            // className="dark:invert"
-            width={400}
-            height={400}
-            // fill
-            priority
-            // onLoad={handleImageLoad}
-          />
-        </div>
-        <div className=" grow relative  p-2">
-          <h1 className=" font-black">
-            {/* {prop1} */}
-            {item.title}
-          </h1>
-          <span>{prop4}</span>
-          {/* onClick={handleClick} */}
-          <button className=" border-2 border-white rounded-xl px-2 my-2">
-            <h2>
-              <Link href={`home/${prop2}`}>See details</Link>
-            </h2>
-          </button>
-          {/* <p>click count: {count}</p> */}
-          {/* <p>Delete item button</p> */}
-        </div>
-      </div>
+          <div className=" grow relative  p-2">
+            <h1 className=" font-black">
+              {/* {prop1} */}
+              {item.title}
+            </h1>
+            <span>{prop4}</span>
+            {/* onClick={handleClick} */}
+            <button className=" border-2 border-white rounded-xl px-2 my-2">
+              <h2>
+                <Link href={`home/${prop2}`}>See details</Link>
+              </h2>
+            </button>
+            {/* <p>click count: {count}</p> */}
+            {/* <p>Delete item button</p> */}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }

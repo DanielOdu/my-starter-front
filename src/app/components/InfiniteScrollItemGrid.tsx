@@ -28,6 +28,8 @@ export default function InfiniteScrollItemGrid({
   const [items, setItems] = useState(initialItems);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView({
+    // root: null,
+    // rootMargin: "0px",
     delay: 1000,
     threshold: 0.5,
   });
@@ -175,7 +177,7 @@ export default function InfiniteScrollItemGrid({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-800"
+            // className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-800"
           >
             <Modal closeModal={closeModal}>
               <div className=" flex">

@@ -9,14 +9,12 @@ import {
   useState,
 } from "react";
 import { BsCircleHalf } from "react-icons/bs";
-import { CgMenu } from "react-icons/cg";
 import {
   useNavBarHeight,
   useUpdateNavBarHeight,
   useUpdateMobileNavBarHeight,
 } from "../context/dimensionContext";
 import { navLinks } from "../lib/navLinks";
-import { link } from "fs";
 
 export default function Nav() {
   const [isRotated, setIsRotated] = useState(false);
@@ -120,6 +118,7 @@ export default function Nav() {
 export function MobileNav() {
   const [isRotated, setIsRotated] = useState(false);
   const mobileNavBarRef = useRef(null);
+  const mobileNavBarRef2 = useRef(null);
   const updateNavBarHeight = useUpdateMobileNavBarHeight();
   const [linksOpen, setLinksOpen] = useState(false);
 
@@ -149,14 +148,13 @@ export function MobileNav() {
 
   const handleMenuClick = () => {
     setLinksOpen(!linksOpen);
-    console.log("menu click");
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        mobileNavBarRef.current &&
-        !mobileNavBarRef.current.contains(event.target) &&
+        mobileNavBarRef2.current &&
+        !mobileNavBarRef2.current.contains(event.target) &&
         event.target.tagName !== "A"
       ) {
         setLinksOpen(false);
@@ -168,7 +166,7 @@ export function MobileNav() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [mobileNavBarRef]);
+  }, [mobileNavBarRef2]);
 
   // const onClick: MouseEventHandler = useCallback((e) => {
   //   if (e.target !== mobileNavBarRef.current) {
@@ -178,11 +176,12 @@ export function MobileNav() {
 
   return (
     <div
-      className=" sm:hidden fixed  top-0 w-full z-50 px-6 text-white"
+      className=" sm:hidden border-b-2 border-white  fixed flex-col  top-0 w-full z-50 px-6 text-white "
       // onClick={onClick}
+      ref={mobileNavBarRef2}
     >
       <div
-        className="text-white bg-black justify-between flex py-2 border-b-2   items-center relative"
+        className="text-white bg-black  justify-between flex py-2   items-center relative"
         ref={mobileNavBarRef}
       >
         {" "}
@@ -275,22 +274,23 @@ export function MobileNav() {
         `}</style>
       </div>
       <div
-        className={` bg-black/95 backdrop-blur-md overflow-hidden transition  ${
+        className={` bg-black/95 backdrop-blur-md overflow-hidden text-lg w-full px-2 ml-auto ${
           linksOpen ? " h-full" : " h-0"
         }`}
       >
         {" "}
-        <div className=" flex-col space-y-4 text-white py-4 text-right">
+        <div className="  flex-col space-y-4 text-white py-4 text-center">
           {navLinks.map((navLink) => (
             <Link
               className=" block cursor-pointer active:text-blue-300 "
               href={navLink.link}
+              onClick={() => setLinksOpen(false)}
             >
               {navLink.label}
             </Link>
           ))}
         </div>
-        <div className=" bg-black py-2 flex items-center justify-end">
+        <div className=" bg-black py-2 flex items-center justify-between w-full">
           {" "}
           <div className=" bg-red-300">LANG</div>
           <div

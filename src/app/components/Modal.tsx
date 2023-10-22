@@ -47,7 +47,7 @@ export default function Modal({
     >
       <div
         ref={wrapper}
-        className=" bg-purple-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 md:w-8/12 lg:w-1/2 p-6"
+        className=" bg-white/5 backdrop-blur-sm absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 md:w-8/12 lg:w-1/2 p-6 rounded-sm "
       >
         {children}
       </div>
