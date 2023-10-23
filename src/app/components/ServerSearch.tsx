@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { useSearchContext } from "../context/context";
+import { FiSearch } from "react-icons/fi";
 
 type SearchContextType = {
   text: string;
@@ -39,14 +40,22 @@ export default function ServerSearch({ search }: { search?: string }) {
     router.push(newUrl, { scroll: false });
   }, [query, router]);
 
+  // const placeholder = () => {
+  //   return (
+  //     <span>
+  //       <FiSearch /> "Search"
+  //     </span>
+  //   );
+  // };
+
   return (
-    <div className=" text-white py-2 ">
+    <div className="  ">
       <input
         type="text"
         placeholder="Search"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="border-2 border-white rounded-3xl bg-transparent placeholder:text-white/30 text-center"
+        className="border-2 border-white rounded-sm bg-transparent placeholder:text-white/30 text-center w-full"
       />
     </div>
   );

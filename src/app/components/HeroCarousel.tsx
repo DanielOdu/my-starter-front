@@ -64,7 +64,7 @@ function HeroCarousel() {
     <div className="  h-[400px] max-w-[1485px] m-auto relative group">
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className=" w-full h-full bg-cover bg-center duration-500 rounded-3xl border-2 "
+        className=" w-full h-full bg-cover bg-center duration-500 rounded-sm border-2 "
       ></div>
       <div className=" opacity-0 group-hover:opacity-100 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-white/25 cursor-pointer transition">
         <BiChevronLeftCircle onClick={prevSlide} size={30} />
@@ -78,7 +78,7 @@ function HeroCarousel() {
             key={dotBtnIndex}
             onClick={() => goToSlide(dotBtnIndex)}
             style={{
-              color: currentIndex === dotBtnIndex ? "blue" : "gray", // Change color based on currentIndex
+              color: currentIndex === dotBtnIndex ? "#60a5fa" : "gray", // Change color based on currentIndex
             }}
           >
             <RxDotFilled

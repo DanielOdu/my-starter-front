@@ -185,7 +185,7 @@ export function MobileNav() {
         ref={mobileNavBarRef}
       >
         {" "}
-        <div> LOGO</div>
+        <div className=" font-black text-blue-400">BASE</div>
         <div
           id="nav-icon3"
           className={`cursor-pointer ${linksOpen ? "open" : ""}`}

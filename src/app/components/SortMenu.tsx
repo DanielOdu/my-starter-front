@@ -44,11 +44,11 @@ export default function SortMenu({ sortOption }: Props) {
   }, [selectedSortOption, router]);
 
   return (
-    <div className=" py-2">
+    <div className="  w-1/2">
       <select
         value={selectedSortOption}
         onChange={handleSortChange}
-        className=" rounded-full  border-2 border-white bg-transparent text-white"
+        className=" rounded-sm w-full  border-2 border-white bg-transparent text-white text-center h-[28px] cursor-pointer"
       >
         <option value="relevance">Relevance</option>
         <option value="price-asc">Price: Low to High</option>
