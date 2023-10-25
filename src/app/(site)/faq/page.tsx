@@ -40,7 +40,7 @@ const faqData = [
 
 export default function faq() {
   return (
-    <div className=" h-[100svh]">
+    <div className=" min-h-[100svh]">
       <h1 className=" font-black text-white text-6xl ">FAQ PAGE</h1>
       <FaqAccordion items={faqData} />
     </div>

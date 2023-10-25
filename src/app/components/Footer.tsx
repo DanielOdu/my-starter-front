@@ -19,7 +19,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <>
-      <div className=" sm:fixed bottom-0 z-50  w-full bg-black  py-2 border-t-2 border-white flex justify-center flex-shrink-0">
+      <div className=" sm:fixed bottom-0 z-50  w-full  py-2 border-t-2 border-white flex justify-center bg-black ">
         <div className=" w-full max-w-[1485px] grid grid-cols-2 sm:grid-cols-3 px-6">
           <span className=" justify-self-start text-white text-xs">
             © copyright {year}
@@ -147,7 +147,7 @@ export default function Footer() {
 
 export function MobileSocialFooter() {
   return (
-    <div className=" sm:hidden px-6 w-full max-w-[1485px] flex justify-center py-4 border-t-2 bottom-0 ">
+    <div className="  sm:hidden px-4 w-full max-w-[1485px] flex justify-center py-3 border-t-2 bottom-0 ">
       <div className="flex  w-28 justify-between  items-center justify-self-center text-white">
         <Link href={"#"} className="hover:text-blue-400 transition-colors">
           <FaGlobe />

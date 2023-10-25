@@ -9,7 +9,7 @@ type Item = {
   brand: string;
   category: string;
   thumbnail: string | (() => string);
-  images: string[];
+  images: string[] | (() => void);
 };
 
 let products: Item[] = [
@@ -84,13 +84,16 @@ let products: Item[] = [
     get thumbnail() {
       return `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}`;
     },
-    images: [
-      "https://i.dummyjson.com/data/products/4/1.jpg",
-      "https://i.dummyjson.com/data/products/4/2.jpg",
-      "https://i.dummyjson.com/data/products/4/3.jpg",
-      "https://i.dummyjson.com/data/products/4/4.jpg",
-      "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
-    ],
+    get images() {
+      return [
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(1)`,
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(2)`,
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(3)`,
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(4)`,
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(5)`,
+        `https://placehold.co/400/060606/a6a6a6/PNG?text=${this.title}(6)`,
+      ];
+    },
   },
   {
     id: 5,

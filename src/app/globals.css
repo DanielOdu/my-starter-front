@@ -31,11 +31,11 @@ body {
 } */
 
 .inactiveCategory {
-  @apply text-sm px-2 uppercase;
+  @apply text-sm uppercase;
 }
 
 .activeCategory {
-  @apply text-sm border-2 border-blue-400 text-blue-400 px-2 rounded-full uppercase transition;
+  @apply text-sm  text-blue-400  uppercase transition;
 }
 
 .activeSlideBtn {

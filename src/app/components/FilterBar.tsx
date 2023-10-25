@@ -3,12 +3,17 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchContext } from "../context/context";
+import { BiCheckbox } from "react-icons/bi";
+import { BiCheckboxSquare } from "react-icons/bi";
+import ServerSearch from "./ServerSearch";
+import SortMenu from "./SortMenu";
 
 type Props = {
   items: any[];
   categories: string[];
   search: string | undefined;
   page: number;
+  sortOption: string | undefined;
 };
 
 type filterContextType = {
@@ -16,7 +21,13 @@ type filterContextType = {
   setSelectedCategories: (selectedCategories: string[]) => void;
 };
 
-export default function FilterBar({ items, categories, search, page }: Props) {
+export default function FilterBar({
+  items,
+  categories,
+  search,
+  page,
+  sortOption,
+}: Props) {
   const router = useRouter();
   const initialRender = useRef(true);
   const { selectedCategories, setSelectedCategories } =
@@ -82,28 +93,37 @@ export default function FilterBar({ items, categories, search, page }: Props) {
   const sortedCategories = categories.sort();
 
   return (
-    <div className=" bg-orange-400 text-white flex space-x-2 pb-2 max-w-full flex-wrap text-sm mt-2 sm:mt-0">
-      {sortedCategories &&
-        sortedCategories.map((category, idx) => {
-          // if (categories.includes(category)){
-          // console.log("selected categories:", selectedCategories);
-          // }
-          return (
-            //* When passing a function that takes parameters as a prop, use this notation <<
-            <div key={`categories-${idx}`}>
-              <button
-                onClick={() => handleCategoryBtnClick(category)}
-                className={`${
-                  selectedCategories?.includes(category)
-                    ? "activeCategory"
-                    : "inactiveCategory"
-                } `}
-              >
-                {category}
-              </button>
-            </div>
-          );
-        })}
-    </div>
+    <>
+      <div className=" flex flex-col sm:hidden">
+        <ServerSearch search={search} />
+        <SortMenu sortOption={sortOption} />
+      </div>
+      <div className=" grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]  text-white  py-2 max-w-full  text-xs mt-2 sm:mt-0 gap-4">
+        {/* flex-wrap space-x-2 */}
+        {sortedCategories &&
+          sortedCategories.map((category, idx) => {
+            // if (categories.includes(category)){
+            // console.log("selected categories:", selectedCategories);
+            // }
+            return (
+              //* When passing a function that takes parameters as a prop, use this notation <<
+              <div key={`categories-${idx}`}>
+                <button
+                  onClick={() => handleCategoryBtnClick(category)}
+                  className={`${
+                    selectedCategories?.includes(category)
+                      ? "activeCategory text-left px-2 mx-2 whitespace-nowrap"
+                      : "inactiveCategory text-left px-2 mx-2 whitespace-nowrap"
+                  } `}
+                >
+                  <div className=" flex items-center">
+                    <BiCheckbox className="" /> <span>{category}</span>
+                  </div>
+                </button>
+              </div>
+            );
+          })}
+      </div>
+    </>
   );
 }

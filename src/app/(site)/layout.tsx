@@ -8,8 +8,9 @@ const SiteLayout = ({ children }: { children: React.ReactNode }) => {
       <NavBarHeightProvider>
         <Nav />
         <MobileNav />
-        <div className=" flex-col w-full">
-          <main className=" max-w-[1485px] w-full px-6 pt-12   ">
+        <div className=" flex flex-col w-full min-h-screen relative">
+          <main className=" max-w-[1485px] w-full px-6 pt-12  flex-grow    ">
+            {/* min-h-[100vh] h-fit  */}
             {children}
           </main>
           <MobileSocialFooter />

@@ -44,7 +44,7 @@ export default function SortMenu({ sortOption }: Props) {
   }, [selectedSortOption, router]);
 
   return (
-    <div className="  w-1/2">
+    <div className="  w-full">
       <select
         value={selectedSortOption}
         onChange={handleSortChange}

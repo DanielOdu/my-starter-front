@@ -33,6 +33,7 @@ export async function getData({
   filter?: string;
   sort?: string;
 }) {
+  // "use server";
   // simulate delay
   // await new Promise((resolve) => setTimeout(resolve, 3000));
   //save the returned value from the imported function to the 'domain' variable
@@ -76,6 +77,7 @@ export async function getData({
 
   const data = await res.json();
   const products = data.productData.products; // Access the products array
+  console.log("products for testing", products);
   const totalItems = data.productData.totalItems; // Access the totalItems count
   const categories = data.categories;
   return { products, totalItems, categories };

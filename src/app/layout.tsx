@@ -17,9 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className=" ">
+      {/* overscroll-y-none */}
       <body
-        className={`${inter.className}  h-screen bg-black flex justify-center select-none relative  grow  `}
+        className={`${inter.className}  h-screen bg-black flex justify-center select-none relative  grow   `}
       >
         {/* <div className=" border-2 border-green-600 rounded-3xl max-w-[90%] max-h-[90%] w-full h-full overflow-auto ">
           {" "} */}

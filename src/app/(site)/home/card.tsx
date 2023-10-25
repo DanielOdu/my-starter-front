@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Item } from "@/app/types/types";
 import { AnimatePresence, motion } from "framer-motion";
 
+//here item values are passed in but the whole item is also being passed in. this can be cut down to be more consise.
 type Props = {
   // prop1: string | number;
   prop2?: any;
@@ -63,7 +64,15 @@ export default function Card({
 
   if (!isLoaded) {
     return (
-      <div className=" bg-gray-800 justify-self-center w-full h-[400px] max-w-[400px] min-w-[150px] sm:min-w-[300px] rounded-2xl animate-pulse"></div>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.1 }}
+          className=" bg-gray-800 justify-self-center w-full h-[400px] max-w-[400px] min-w-[150px] sm:min-w-[300px] rounded-sm animate-pulse"
+        ></motion.div>
+      </AnimatePresence>
     );
   }
 
@@ -83,7 +92,7 @@ export default function Card({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
-          className={` transition-opacity duration-500 h-fit justify-self-center w-full  border-2 border-white rounded-2xl overflow-hidden text-white text-xs max-w-[400px] min-w-[150px] sm:min-w-[300px] ${
+          className={` transition-opacity duration-500 h-fit justify-self-center w-full bg-slate-800   rounded-sm overflow-hidden text-white text-xs max-w-[400px] min-w-[150px] sm:min-w-[300px] ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={handleImageLoad}
