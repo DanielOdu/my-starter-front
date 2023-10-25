@@ -2177,14 +2177,10 @@ export const getProducts = async ({
   searchQuery?: string | undefined | null;
   page: number;
   limit: number;
-  filter?: string[] | undefined | null;
-  sort: string | null;
+  filter?: string | undefined | null;
+  sort: string | undefined;
 }) => {
-  console.log("(app/lib/sampleData.tsx) getProducts() triggered");
-  console.log(
-    "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
-    searchQuery
-  );
+  console.log("(app/lib/sampleData.tsx) getProducts() triggered ---------");
   console.log(
     "(app/lib/sampleData.tsx) page passed into getProducts() is:",
     page
@@ -2192,6 +2188,10 @@ export const getProducts = async ({
   console.log(
     "(app/lib/sampleData.tsx) limit passed into getProducts() is:",
     limit
+  );
+  console.log(
+    "(app/lib/sampleData.tsx) searchQuery passed into getProducts() is:",
+    searchQuery
   );
   console.log(
     "(app/lib/sampleData.tsx) filter passed into getProducts() is:",

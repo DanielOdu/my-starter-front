@@ -54,10 +54,11 @@ export default function Nav() {
     >
       <div className=" max-w-[1485px] px-6  w-full flex justify-between items-center">
         <div className="space-x-3 font-black uppercase text-white ">
-          {navLinks.map((navLink) => (
+          {navLinks.map((navLink, idx) => (
             <Link
               className="hover:text-blue-400 transition-colors"
               href={navLink.link}
+              key={idx}
             >
               {navLink.label}
             </Link>

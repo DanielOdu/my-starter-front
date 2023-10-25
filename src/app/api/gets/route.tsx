@@ -55,8 +55,11 @@ export async function GET(request: NextRequest) {
     //   categories
     // );
 
+    const products = productData.products; // Access the products array
+    const totalItems = productData.totalItems; // Access the totalItems count
+
     return NextResponse.json(
-      { message: "OK", productData, categories },
+      { message: "OK", products, totalItems, categories },
       { status: 200 }
     );
   } catch (err) {

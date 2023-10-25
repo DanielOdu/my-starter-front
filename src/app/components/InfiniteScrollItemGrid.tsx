@@ -3,7 +3,7 @@
 import { useEffect, useState, lazy, SetStateAction } from "react";
 import { useInView } from "react-intersection-observer";
 const Card = lazy(() => import("../(site)/home/card"));
-import { getData } from "../(site)/home/page";
+import { getData } from "@/app/actions/serverActions";
 import Modal from "./Modal";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -97,11 +97,12 @@ export default function InfiniteScrollItemGrid({
     let next = page + 1;
     // simulate delay
     // await new Promise((resolve) => setTimeout(resolve, 3000));
-    if (0 === 0) {
-      const test = document.getElementById("test");
-      test.style.backgroundColor = "red";
-    }
+    // if (0 === 0) {
+    //   const test = document.getElementById("test");
+    //   test.style.backgroundColor = "red";
+    // }
     // this is the line that doesnt work in safari, getting the actual products out of the getData function. simulating products works. use dev tools in safari to look for errors.
+
     try {
       const { products } = await getData({ query: search, page: next, filter });
       console.log("More items loaded", items);
@@ -179,8 +180,10 @@ export default function InfiniteScrollItemGrid({
           {/* loading spinner */}
           {items?.length < totalItems && (
             <>
-              <div ref={ref}> intersection</div>
-              <div className=" col-span-full mt-16 flex justify-center mb-8">
+              <div
+                ref={ref}
+                className=" col-span-full mt-16 flex justify-center mb-8"
+              >
                 <svg
                   aria-hidden="true"
                   className="h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"

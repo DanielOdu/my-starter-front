@@ -13,75 +13,12 @@ import BackToTopBtn from "@/app/components/BackToTopBtn";
 import { Roboto } from "next/font/google";
 import { useNavBarHeight } from "@/app/context/dimensionContext";
 import Options from "@/app/components/OptionsBar";
+import { getData } from "@/app/actions/serverActions";
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "100",
 });
-
-//This async function is used to retrieve the data from your API endpoint. These requests are ideally done on the server side so you wouldnt use 'use client' here, although in some cases that could still work.
-export async function getData({
-  page = 1,
-  limit = 12,
-  query,
-  filter,
-  sort,
-}: {
-  page: number;
-  limit?: number;
-  query?: string | undefined | null;
-  filter?: string;
-  sort?: string;
-}) {
-  // "use server";
-  // simulate delay
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-  //save the returned value from the imported function to the 'domain' variable
-  const domain = getDomain();
-  const searchQuery = query;
-  console.log(
-    "(home/page.tsx) searchQuery in getData function is:",
-    searchQuery
-  );
-  //What is the endpoint that has access to the data?
-  const endpoint = `${domain}/api/gets?searchQuery=${encodeURIComponent(
-    searchQuery as string
-  )}&page=${page}&limit=${limit}&filter=${filter}&sort=${sort}`;
-  console.log("(home/page.tsx) getData() triggered. endpoint =", endpoint);
-
-  //Ask to fetch the returned data from the endpoint and store it as a 'response' (res)  //HTTP GET
-  //There are different fetch caching options:
-  // force-cache (default) - fetches data once at build time and never again.
-  // revalidate - fetches data in set intervals
-  // no-store - fetches each time the component is rendered
-
-  //un-comment the one you want to use. non default options should only be used in sever components. If you have a client component that triggers a fetch with a button etc this will be handled in a different way
-
-  // const res = await fetch(endpoint); //no store default option
-  // const res = await fetch(endpoint, { next: { revalidate: 10 } }); //revalidate after 10 seconds
-  const res = await fetch(endpoint, { cache: "no-store" }); //revalidate on each render
-
-  //Check that the response is OK, if not, throw an error
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  //Check that the content-type is application/json. If its not, return an empty array
-  if (res.headers.get("content-type") != "application/json") {
-    console.log("Not application/json still");
-    return { items: [] };
-  }
-
-  //This return statement assumes the response is returned as json. If you're getting errors, its worth checking this in your endpoint.
-  // console.log("Returning data");
-
-  const data = await res.json();
-  const products = data.productData.products; // Access the products array
-  console.log("products for testing", products);
-  const totalItems = data.productData.totalItems; // Access the totalItems count
-  const categories = data.categories;
-  return { products, totalItems, categories };
-}
 
 //Your default function that renders the content will also be async and will 'await' the getData function above in order to have access to the data in the component.
 export default async function HomePage({
@@ -91,6 +28,11 @@ export default async function HomePage({
 }) {
   console.log(
     "(home/page.tsx) HomePage() ---------------------- Start of data flow ------------------------"
+  );
+  // console.log("(home/page.tsx) params:", searchParams);
+  console.log(
+    "(home/page.tsx) searchparams in default HomePage function is:",
+    searchParams
   );
   const page =
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
@@ -109,16 +51,18 @@ export default async function HomePage({
     initialFilters = Array.from(filterParams.values());
   }
 
-  console.log("initialFilters params:", filterParams);
-  console.log("initialFilters:", initialFilters);
-
   // console.log("filterparams !has undefined");
   const sort =
     typeof searchParams.sort === "string" ? searchParams.sort : undefined;
-  console.log(
-    "(home/page.tsx) searchparams in default HomePage function is:",
-    searchParams
-  );
+
+  //Logs
+  console.log("(home/page.tsx) page:", page);
+  console.log("(home/page.tsx) limit:", limit);
+  console.log("(home/page.tsx) search:", search);
+  console.log("(home/page.tsx) filter:", filter);
+  console.log("(home/page.tsx) initialFilters params:", filterParams);
+  console.log("(home/page.tsx) initialFilters:", initialFilters);
+  console.log("(home/page.tsx) sort:", sort);
 
   const { products, totalItems, categories } = await getData({
     page,
