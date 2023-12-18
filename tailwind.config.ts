@@ -12,6 +12,15 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "lemon-landing-dark": "url('/lemon landing.png')",
+      },
+      colors: {
+        bg: "#100F0F",
+        tx: "#CECDC3",
+        lmn: "#AD8301",
+      },
+      lineHeight: {
+        tight: "0.75",
       },
     },
   },

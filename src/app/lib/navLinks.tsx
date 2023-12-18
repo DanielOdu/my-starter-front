@@ -4,7 +4,7 @@ export const navLinks = [
     link: "./",
   },
   {
-    label: "Product Grid",
+    label: "ProductGrid",
     link: "/home",
   },
   {
@@ -12,7 +12,7 @@ export const navLinks = [
     link: "/carousel",
   },
   {
-    label: "Accordion",
+    label: "FAQ",
     link: "/faq",
   },
   {

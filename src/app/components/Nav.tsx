@@ -1,27 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsCircleHalf } from "react-icons/bs";
 import {
-  useNavBarHeight,
   useUpdateNavBarHeight,
   useUpdateMobileNavBarHeight,
 } from "../context/dimensionContext";
 import { navLinks } from "../lib/navLinks";
+import { Logo } from "./svgs";
+import TextEffect from "./TextEffect";
 
 export default function Nav() {
   const [isRotated, setIsRotated] = useState(false);
-  // const [navBarHeight, setNavBarHeight] = useState(0);
   const navBarRef = useRef(null);
-  // const navBarHeight = useNavBarHeight(); // Use the context to get the navBarHeight
-  const updateNavBarHeight = useUpdateNavBarHeight();
+  const updateNavBarHeight = useUpdateNavBarHeight(); // Use the context to update the navBarHeight
 
   useEffect(() => {
     const updateHeight = () => {
@@ -49,59 +42,31 @@ export default function Nav() {
 
   return (
     <div
-      className="fixed  w-full z-50 bg-black  m-0  justify-center py-2 border-b-2 hidden sm:flex  "
+      className="fixed  w-full z-50 bg-bg  m-0  justify-center py-2 border-b-2 border-[#403E3C] hidden sm:flex  "
       ref={navBarRef}
     >
       <div className=" max-w-[1485px] px-6  w-full flex justify-between items-center">
-        <div className="space-x-3 font-black uppercase text-white ">
+        <div>
+          <Logo className=" w-8 fill-lmn" />
+        </div>
+        <div className="space-x-5 font-mono uppercase text-white text-sm px-4 ">
           {navLinks.map((navLink, idx) => (
             <Link
-              className="hover:text-blue-400 transition-colors"
+              className="hover:text-lmn transition-colors"
               href={navLink.link}
               key={idx}
             >
-              {navLink.label}
+              <TextEffect
+                text={`${navLink.label}`}
+                className=""
+                enableHover={true}
+              />
+              {/* {navLink.label} */}
             </Link>
           ))}
-          {/* <Link className="hover:text-blue-400 transition-colors" href="./">
-            Landing
-          </Link>
-          <Link className="hover:text-blue-400 transition-colors" href="/home">
-            Product Grid
-          </Link>
-          <Link
-            className="hover:text-blue-400 transition-colors"
-            href="/carousel"
-          >
-            Carousel
-          </Link>
-          <Link className="hover:text-blue-400 transition-colors" href="/faq">
-            Accordion
-          </Link>
-          <Link
-            className="hover:text-blue-400 transition-colors"
-            href="/contact"
-          >
-            Contact form
-          </Link>
-          <Link className="hover:text-blue-400 transition-colors" href="/about">
-            About
-          </Link>
-          <Link
-            className="hover:text-blue-400 transition-colors "
-            href="./third-party-api"
-          >
-            third-party-api
-          </Link>
-          <Link
-            className="hover:text-blue-400 transition-colors"
-            href="./multiple-third-party-api"
-          >
-            multiple-third-party-api
-          </Link> */}
         </div>
         <div className=" flex items-center">
-          <div className="text-white px-2">LANG</div>
+          <div className="text-white px-2 font-mono">LANG</div>
           <div
             className={`text-white transition cursor-pointer ${
               isRotated ? "rotate-180" : ""
@@ -177,16 +142,18 @@ export function MobileNav() {
 
   return (
     <div
-      className=" sm:hidden border-b-2 border-white  fixed flex-col  top-0 w-full z-50 px-6 text-white "
+      className=" sm:hidden border-b-2 border-[#403E3C]  fixed flex-col  top-0 w-full z-50 px-6 text-white "
       // onClick={onClick}
       ref={mobileNavBarRef2}
     >
       <div
-        className="text-white bg-black  justify-between flex py-2   items-center relative"
+        className="text-white bg-bg  justify-between flex py-2   items-center relative"
         ref={mobileNavBarRef}
       >
         {" "}
-        <div className=" font-black text-blue-400">BASE</div>
+        <div>
+          <Logo className=" w-8 fill-lmn" />
+        </div>
         <div
           id="nav-icon3"
           className={`cursor-pointer ${linksOpen ? "open" : ""}`}
@@ -275,15 +242,15 @@ export function MobileNav() {
         `}</style>
       </div>
       <div
-        className={` bg-black/95 backdrop-blur-md overflow-hidden text-lg w-full px-2 ml-auto ${
+        className={` bg-bg/[0.98] backdrop-blur-md overflow-hidden text-lg w-full px-2 ml-auto  ${
           linksOpen ? " h-full" : " h-0"
         }`}
       >
         {" "}
-        <div className="  flex-col space-y-4 text-white py-4 text-center">
+        <div className="  flex-col space-y-4 text-white py-4 text-center font-mono text-sm">
           {navLinks.map((navLink) => (
             <Link
-              className=" block cursor-pointer active:text-blue-300 "
+              className=" block cursor-pointer active:text-lmn "
               href={navLink.link}
               onClick={() => setLinksOpen(false)}
             >
@@ -291,9 +258,9 @@ export function MobileNav() {
             </Link>
           ))}
         </div>
-        <div className=" bg-black py-2 flex items-center justify-between w-full">
+        <div className=" bg-bg py-2 flex items-center justify-between w-full">
           {" "}
-          <div className=" bg-red-300">LANG</div>
+          <div className="  font-mono text-sm">LANG</div>
           <div
             className={`text-white text-2xl  transition cursor-pointer bg-green-200 w-fit ${
               isRotated ? "rotate-180" : ""

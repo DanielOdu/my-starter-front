@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import TextEffect from "@/app/components/TextEffect";
 
 export default function about() {
   const [ref, inView] = useInView({
@@ -32,6 +33,13 @@ export default function about() {
   return (
     <div>
       {" "}
+      <div className="h-full">
+        <TextEffect
+          text="DANIELOLUWATOSINODUKOYA"
+          className=" text-white uppercase"
+          enableHover={true}
+        />
+      </div>
       <h1 className=" font-black text-6xl text-white ">ABOUT</h1>
       <h1 className=" font-black text-6xl text-white ">ABOUT</h1>
       <h1 className=" font-black text-6xl text-white ">ABOUT</h1>

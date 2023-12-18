@@ -24,4 +24,13 @@ module.exports = {
   experimental: {
     serverActions: true,
   },
+  //needed for svgr to imprt svgs
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
 };
